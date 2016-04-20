@@ -5,8 +5,8 @@ import path from 'path';
 export default {
   name: 'Kid blog',
 
-  webport: 8051,
-  apiport: 8050,
+  webport: 8080,
+  apiport: 8081,
 
   rootPath: path.resolve(__dirname, '../'),
 
