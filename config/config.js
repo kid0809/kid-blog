@@ -11,4 +11,5 @@ export default {
   rootPath: path.resolve(__dirname, '../'),
 
   secret: 'push loli',
+  db: 'blog'
 };

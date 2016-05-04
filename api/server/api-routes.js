@@ -1,6 +1,6 @@
 'use strict'
 
-import classModel from '../src/common/DB'
+import User from '../src/user/userController'
 
 module.exports = (express, env, app) => {
 
@@ -10,16 +10,7 @@ module.exports = (express, env, app) => {
     res.send('hello world')
   })
 
-  router.post('/create', (req, res) => {
-    const newStudent = [{
-        name: req.body.name,
-        studentId: req.body.student_id
-    }]
-    classModel.create(newStudent, (err) => {
-      if(err) return console.log(err)
-      console.log('新学生创建成功')
-    })
-  })
+  router.post('/regist', User.regist)
 
   // Route not found - set 404
   router.get('*', (req, res) => {

@@ -19,6 +19,7 @@
     "cookie-parser": "^1.4.1",
     "errorhandler": "^1.4.3",
     "express": "^4.13.4",
+    "lodash": "^4.11.2",
     "mongodb": "^2.1.16",
     "mongoose": "^4.4.12",
     "morgan": "^1.7.0",
