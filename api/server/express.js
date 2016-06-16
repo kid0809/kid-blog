@@ -9,9 +9,22 @@ import morgan       from 'morgan'
 import compression  from 'compression'
 import errorhandler from 'errorhandler'
 import cookieParser from 'cookie-parser'
+import session      from 'express-session'
 
 module.exports = (app, env, config) => {
 	app.use(cookieParser())
+
+  app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 3600000 }
+  }))
+
+  app.use((req, res, next) => {
+    console.log(req.session)
+    next()
+  })
 
   // body parse
   app.use(bodyParser.urlencoded({
