@@ -11,6 +11,7 @@ module.exports = (express, env, app) => {
   })
 
   router.post('/regist', User.regist)
+  router.post('/login', User.login)
 
   // Route not found - set 404
   router.get('*', (req, res) => {
