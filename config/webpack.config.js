@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
     'webpack-hot-middleware/client',
-    './web/index'
+    './web/index.js'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -20,10 +20,17 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['babel'],
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react']
+        },
+        exclude: /node_modules/
+      },
+      {
+        test: /\.js$/,
         exclude: /node_modules/,
-        include: __dirname
-      }
+        loader: 'eslint-loader'
+      },
     ]
   }
 }

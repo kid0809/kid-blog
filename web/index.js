@@ -1,16 +1,21 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { render } from 'react-dom'
+import { browserHistory, Router } from 'react-router'
+import { Provider } from 'react-redux'
+import { syncHistoryWithStore } from 'react-router-redux'
+import configureStore from './store/configureStore'
+import routes from './routes'
+import DevTools from './containers/DevTools'
 
-class App extends Component {
-  render() {
-    return (
-      <div>111234567</div>
-    )
-  }
-}
-
+const store = configureStore()
+const history = syncHistoryWithStore(browserHistory, store)
 
 render(
-  <App />,
+  <Provider store={store}>
+    <div>
+      <Router history={history} routes={routes} />
+      <DevTools />
+    </div>
+  </Provider>,
   document.getElementById('root')
 )
