@@ -25,7 +25,7 @@ module.exports = [
     entry: {
       vendor: ['react', 'react-router', 'redux'],
       css: ['./web/public/sass/main.scss'],
-      compoments: [
+      components: [
         'webpack-hot-middleware/client',
         './web/index.js'
       ]
