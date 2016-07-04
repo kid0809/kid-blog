@@ -22,9 +22,19 @@ module.exports = {
       gender: _.trim(req.body.gender)
     }
 
-    User.create(newUser, (err, data) => {
-      if(err) return console.log(err)
-      res.json(data)
+    User.findOne({loginName: newUser.loginName}, (err1, user) => {
+      if (err1) {
+        return res.json(err1)
+      }
+
+      if (user) {
+        return res.json('登录名已存在')
+      }
+
+      User.create(newUser, (err2, data) => {
+        if(err2) return res.json(err2)
+        res.json(data)
+      })
     })
   },
 

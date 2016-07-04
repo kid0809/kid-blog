@@ -12,8 +12,8 @@ class Nav extends React.Component {
     return (
       <nav>
         <span><Link to={{ pathname: '/home' }}>home</Link></span>
-        <span><a href="/login">login</a></span>
-        <span><a href="/reg">register</a></span>
+        <span><Link to={{ pathname: '/login' }}>login</Link></span>
+        <span><Link to={{ pathname: '/reg' }}>register</Link></span>
       </nav>
     )
   }

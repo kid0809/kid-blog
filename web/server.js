@@ -7,7 +7,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware'
 import config from '../config/dev.webpack.config'
 
 const app = express()
-const port = 3000
+const port = 8080
 
 const env = process.env.NODE_ENV || 'development'
 app.set('env', env)
@@ -18,10 +18,6 @@ app.set('env', env)
 const publicDir = path.resolve(__dirname, '../public')
 app.use('/', express.static(publicDir))
 
-
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + '/index.html')
-})
 
 /**
  * 判断运行环境,执行不同动作
@@ -39,6 +35,11 @@ if (env === 'development') {
     showStack: true
   }))
 }
+
+
+app.use(function(req, res) {
+  res.sendFile(__dirname + '/index.html')
+})
 
 app.listen(port, (error) => {
   if (error) {

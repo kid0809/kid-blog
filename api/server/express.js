@@ -21,11 +21,6 @@ module.exports = (app, env, config) => {
     cookie: { maxAge: 3600000 }
   }))
 
-  app.use((req, res, next) => {
-    console.log(req.session)
-    next()
-  })
-
   // body parse
   app.use(bodyParser.urlencoded({
     extended: true,
