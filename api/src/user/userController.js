@@ -19,6 +19,7 @@ module.exports = {
       password: passwordhash,
       displayName: _.trim(req.body.displayName),
       avatar: _.trim(req.body.avatar),
+      email: _.trim(req.body.email),
       gender: _.trim(req.body.gender)
     }
 

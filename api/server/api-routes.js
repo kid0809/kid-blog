@@ -7,7 +7,17 @@ module.exports = (express, env, app) => {
   const router = express.Router()
 
   router.get('/', (req, res) => {
-    res.send('hello world')
+    let sess = req.session
+    console.log(sess)
+    if (sess.views) {
+      res.setHeader('Content-Type', 'text/html')
+      res.write('<p>views: ' + sess.views + '</p>')
+      res.write('<p>expires in: ' + (sess.cookie.maxAge / 1000) + 's</p>')
+      res.end()
+    } else {
+      sess.views = 1
+      res.end('welcome to the session demo. refresh!')
+    }
   })
 
   router.post('/regist', User.regist)

@@ -14,6 +14,7 @@ class Reg extends React.Component {
     const password = this.refs.password.value
     const password2 = this.refs.password2.value
     const avatar = this.refs.avatar.value
+    const email = this.refs.email.value
     const gender = this.refs.gender.value
 
     if (password !== password2) {
@@ -26,6 +27,7 @@ class Reg extends React.Component {
       displayName: displayname,
       password: password,
       avatar: avatar,
+      email: email,
       gender: gender
     }
 
@@ -60,6 +62,8 @@ class Reg extends React.Component {
         确认密码： <input type="password" ref="password2" />
         <br />
         头像： <input type="text" ref="avatar" />
+        <br />
+        邮箱： <input type="text" ref="email" />
         <br />
         性别：
         <select ref="gender">
