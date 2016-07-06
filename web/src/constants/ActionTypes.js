@@ -1,1 +1,3 @@
-'use strict'
+// constants for user
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'

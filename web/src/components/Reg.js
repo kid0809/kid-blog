@@ -1,5 +1,4 @@
 import React from 'react'
-import 'isomorphic-fetch'
 
 /* global API_SERVER */
 
@@ -31,15 +30,13 @@ class Reg extends React.Component {
       gender: gender
     }
 
-    // const data = new FormData()
-    // data.append('json', JSON.stringify(payload))
-
     fetch(`${API_SERVER}/api/regist`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      credentials: 'include'
     })
       .then((res) => {
         return res.json()

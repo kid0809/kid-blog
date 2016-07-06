@@ -34,6 +34,7 @@ module.exports = {
 
       User.create(newUser, (err2, data) => {
         if(err2) return res.json(err2)
+        req.session.user = data
         res.json(data)
       })
     })
@@ -43,15 +44,40 @@ module.exports = {
    * 用户登录
    *******************************************/
   login: (req, res) => {
+    console.log(req.session)
     const key = config.secret
     const loginName = _.trim(req.body.loginName)
     const passwordhash = crypto.createHmac('sha1', key).update(_.trim(req.body.password)).digest('hex')
 
 
-    User.find({ loginName: loginName, password: passwordhash }, (err, data) => {
-      if(err) return console.log(err)
-      data[0].password = ''
+    User.findOne({ loginName: loginName, password: passwordhash }, (err, data) => {
+      if(err) return res.json(err)
+      req.session.user = data
       res.json(data)
     })
+  },
+
+  /*******************************************
+   * 用户登出
+   *******************************************/
+  logout: (req, res) => {
+    if (req.session.user) {
+      req.session.user = null
+      res.status(200).json('success')
+    } else {
+      res.status(401).json('error')
+    }
+  },
+
+  /*******************************************
+   * 判断用户是否登录
+   *******************************************/
+  isLogin: (req, res) => {
+    console.log(req.session)
+    if (req.session.user) {
+      res.status(200).json('success')
+    } else {
+      res.status(401).json('error')
+    }
   }
 }

@@ -1,8 +1,14 @@
-export const SELECT_REDDIT = 'SELECT_REDDIT'
+import * as Types from '../constants/ActionTypes'
+// import { CALL_API, getJSON } from 'redux-api-middleware'
 
-
-export function selectReddit() {
+export function login() {
   return {
-    type: SELECT_REDDIT
+    type: Types.LOGIN
+  }
+}
+
+export function logout() {
+  return {
+    type: Types.LOGOUT
   }
 }
