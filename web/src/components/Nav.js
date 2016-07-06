@@ -22,6 +22,7 @@ class Nav extends React.Component {
       .then((res) => parseJSON(res))
       .then((success) => {
         console.log(JSON.stringify(success))
+        sessionStorage.removeItem('user')
         dispatch(logout())
       })
       .catch((error) => {

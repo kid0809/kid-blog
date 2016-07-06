@@ -23,19 +23,28 @@ module.exports = {
       gender: _.trim(req.body.gender)
     }
 
-    User.findOne({loginName: newUser.loginName}, (err1, user) => {
+    User.findOne({loginName: newUser.loginName}, (err1, data1) => {
       if (err1) {
         return res.json(err1)
       }
 
-      if (user) {
+      if (data1) {
         return res.json('登录名已存在')
       }
 
-      User.create(newUser, (err2, data) => {
+      User.create(newUser, (err2, data2) => {
         if(err2) return res.json(err2)
-        req.session.user = data
-        res.json(data)
+
+        const user = {
+          loginName: data2.loginName,
+          displayName: data2.displayName,
+          avatar: data2.avatar,
+          email: data2.email,
+          gender: data2.gender
+        }
+
+        req.session.user = user
+        res.json(user)
       })
     })
   },
@@ -44,7 +53,6 @@ module.exports = {
    * 用户登录
    *******************************************/
   login: (req, res) => {
-    console.log(req.session)
     const key = config.secret
     const loginName = _.trim(req.body.loginName)
     const passwordhash = crypto.createHmac('sha1', key).update(_.trim(req.body.password)).digest('hex')
@@ -52,8 +60,17 @@ module.exports = {
 
     User.findOne({ loginName: loginName, password: passwordhash }, (err, data) => {
       if(err) return res.json(err)
-      req.session.user = data
-      res.json(data)
+
+      const user = {
+        loginName: data.loginName,
+        displayName: data.displayName,
+        avatar: data.avatar,
+        email: data.email,
+        gender: data.gender
+      }
+
+      req.session.user = user
+      res.json(user)
     })
   },
 
@@ -73,9 +90,8 @@ module.exports = {
    * 判断用户是否登录
    *******************************************/
   isLogin: (req, res) => {
-    console.log(req.session)
     if (req.session.user) {
-      res.status(200).json('success')
+      res.status(200).json(req.session.user)
     } else {
       res.status(401).json('error')
     }

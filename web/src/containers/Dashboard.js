@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Nav from '../components/Nav'
 import { checkStatus, parseJSON } from '../utils/fetch'
-import 'isomorphic-fetch'
 import { login } from '../actions'
 
 /* global API_SERVER */
@@ -19,6 +18,7 @@ class Dashboard extends React.Component {
       .then((res) => parseJSON(res))
       .then((success) => {
         console.log(JSON.stringify(success))
+        sessionStorage.setItem('user', JSON.stringify(success))
         dispatch(login())
       })
       .catch((error) => {

@@ -2,7 +2,6 @@ import React from 'react'
 import { checkStatus, parseJSON } from '../utils/fetch'
 import { push } from 'react-router-redux'
 import { login } from '../actions'
-import 'isomorphic-fetch'
 
 /* global API_SERVER */
 
@@ -33,6 +32,7 @@ class Login extends React.Component {
       .then((res) => parseJSON(res))
       .then((success) => {
         console.log(JSON.stringify(success))
+        sessionStorage.setItem('user', JSON.stringify(success))
         dispatch(login())
         dispatch(push('/'))
       })

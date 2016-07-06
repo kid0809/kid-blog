@@ -20,7 +20,6 @@ module.exports = (app, env, config) => {
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    key: 'hehe',
     cookie: { maxAge: 3600000 },
     store: new MongoStore({ mongooseConnection: db })
   }))
