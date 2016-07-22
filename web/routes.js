@@ -7,11 +7,13 @@ import Dashboard from './src/containers/Dashboard'
 import Home from './src/components/Home'
 import Login from './src/components/Login'
 import Reg from './src/components/Reg'
+import Post from './src/components/Post'
 
 export default (
   <Route path="/" component={Dashboard}>
     <Route path="/home" component={Home} />
     <Route path="/login" component={Login} />
     <Route path="/reg" component={Reg} />
+    <Route path="/post" component={Post} />
   </Route>
 )
