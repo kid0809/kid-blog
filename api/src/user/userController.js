@@ -62,11 +62,10 @@ module.exports = {
       if(err) return res.json(err)
 
       const user = {
-        loginName: data.loginName,
+        userid: data._id,
         displayName: data.displayName,
         avatar: data.avatar,
-        email: data.email,
-        gender: data.gender
+        email: data.email
       }
 
       req.session.user = user
@@ -78,6 +77,7 @@ module.exports = {
    * 用户登出
    *******************************************/
   logout: (req, res) => {
+    console.log(req.session)
     if (req.session.user) {
       req.session.user = null
       res.status(200).json('success')
