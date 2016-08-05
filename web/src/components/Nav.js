@@ -33,9 +33,9 @@ class Nav extends React.Component {
   renderNotLogin() {
     return (
       <nav>
-        <span><Link to={{ pathname: '/home' }}>home</Link></span>
-        <span><Link to={{ pathname: '/login' }}>login</Link></span>
-        <span><Link to={{ pathname: '/reg' }}>register</Link></span>
+        <span><Link to={{ pathname: '/home' }}>主页</Link></span>
+        <span><Link to={{ pathname: '/login' }}>登录</Link></span>
+        <span><Link to={{ pathname: '/reg' }}>注册</Link></span>
       </nav>
     )
   }

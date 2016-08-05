@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Nav from '../components/Nav'
+import Header from '../components/Header'
 import { checkStatus, parseJSON } from '../utils/fetch'
 import { login } from '../actions'
 
@@ -30,11 +31,14 @@ class Dashboard extends React.Component {
     const { user, dispatch } = this.props
     const { islogin } = user
     return (
-      <div className="main-wrapper">
+      <div>
+        <Header islogin={islogin} dispatch={dispatch} />
         <Nav islogin={islogin} dispatch={dispatch} />
-        {this.props.children && React.cloneElement(this.props.children, {
-          dispatch: dispatch
-        })}
+        <div className="main-wrapper">
+          {this.props.children && React.cloneElement(this.props.children, {
+            dispatch: dispatch
+          })}
+        </div>
       </div>
     )
   }

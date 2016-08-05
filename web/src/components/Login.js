@@ -34,7 +34,7 @@ class Login extends React.Component {
         console.log(JSON.stringify(success))
         sessionStorage.setItem('user', JSON.stringify(success))
         dispatch(login())
-        dispatch(push('/'))
+        dispatch(push('/home'))
       })
       .catch((error) => {
         console.log('request failed', error)

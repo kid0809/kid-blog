@@ -11,7 +11,6 @@ import errorhandler from 'errorhandler'
 import cookieParser from 'cookie-parser'
 import session      from 'express-session'
 
-const MongoStore = require('connect-mongo')(session)
 
 module.exports = (app, env, config) => {
 	app.use(cookieParser())
@@ -20,8 +19,7 @@ module.exports = (app, env, config) => {
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 3600000 },
-    store: new MongoStore({ mongooseConnection: db })
+    cookie: { maxAge: 36000000 }
   }))
 
   // body parse

@@ -1,4 +1,23 @@
 @import './normalize.css';
-@import './dashboard.css';
+@import './dashboard.scss';
 @import './editor.scss';
 @import './markdown.scss';
+@import './header.scss';
+
+* {
+  box-sizing: border-box;
+  &:before, &:after {
+  	box-sizing: border-box;
+  }
+}
+
+html body {
+  height: 100%;
+  font-family: "PingFang SC,Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,Arial,sans-serif";
+}
+
+.main-wrapper {
+  margin-left: 150px;
+  margin-top: 60px;
+  padding: 50px; 
+}

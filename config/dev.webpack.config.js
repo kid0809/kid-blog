@@ -25,8 +25,8 @@ module.exports = {
     sourceMapFilename: 'map/[file].map'
   },
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify("development")
