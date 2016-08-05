@@ -15,7 +15,7 @@ app.set('env', env)
 /**
  * 用于指定URL路径和服务器路径的映射
  */
-const publicDir = path.resolve(__dirname, '../public')
+const publicDir = path.resolve(__dirname, './public')
 app.use('/', express.static(publicDir))
 
 

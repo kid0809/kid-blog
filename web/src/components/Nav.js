@@ -6,54 +6,14 @@ import { checkStatus, parseJSON } from '../utils/fetch'
 /* global API_SERVER */
 
 class Nav extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
-  logout(event) {
-    event.preventDefault()
-    const { dispatch } = this.props
-
-    fetch(`${API_SERVER}/api/logout`, {
-      method: 'GET',
-      credentials: 'include'
-    })
-      .then((res) => checkStatus(res))
-      .then((res) => parseJSON(res))
-      .then((success) => {
-        console.log(JSON.stringify(success))
-        sessionStorage.removeItem('user')
-        dispatch(logout())
-      })
-      .catch((error) => {
-        console.log('request failed', error)
-      })
-  }
-
-  renderNotLogin() {
-    return (
-      <nav>
-        <span><Link to={{ pathname: '/home' }}>主页</Link></span>
-        <span><Link to={{ pathname: '/login' }}>登录</Link></span>
-        <span><Link to={{ pathname: '/reg' }}>注册</Link></span>
-      </nav>
-    )
-  }
-
-  renderLogin() {
-    return (
-      <nav>
-        <span><Link to={{ pathname: '/home' }}>home</Link></span>
-        <span ><a href="#" onClick={this.logout.bind(this)}>loginOut</a></span>
-        <span><Link to={{ pathname: '/post' }}>post</Link></span>
-      </nav>
-    )
-  }
-
   render() {
     const { islogin } = this.props
     return (
-      islogin ? this.renderLogin() : this.renderNotLogin()
+      <nav>
+        <div className="user-wrap">
+          <img src="images/default.jpg" alt="" className="user-avatar" />
+        </div>
+      </nav>
     )
   }
 }

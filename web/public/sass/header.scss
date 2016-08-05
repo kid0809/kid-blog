@@ -1,3 +1,6 @@
+$hearderColor: rgba(44,44,44,0.95);
+$fontColor: #fff;
+
 .header {
   position: fixed;
   display: flex;
@@ -7,8 +10,8 @@
   left: 0;
   height: 60px;
   width: 100%;
-  background: rgba(44,44,44,0.95);
-  color: #fff;
+  background: $hearderColor;
+  color: $fontColor;
   .logo {
     font-size: 22px;
     font-weight: 600px;
@@ -30,7 +33,7 @@
         width: 80px;
         text-align: center;
         a {
-          color: #fff;
+          color: $fontColor;
           &:hover {
             color: #6556e2;
           }

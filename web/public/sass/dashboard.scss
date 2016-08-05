@@ -12,26 +12,23 @@ nav {
   position: fixed;
   left: 0;
   top: 60px;
-  font-family: "Microsoft YaHei";
   font-size: 1.1em;
-  width: 150px;
+  width: 250px;
   height: 100%;
   border-right: 1px solid #ddd;
   text-align: center;
+  .user-wrap {
+    margin-top: 40px;
+    .user-avatar {
+      height: 60px;
+      width: 60px;
+      margin: 0 auto;
+      display: block;
+      border-radius: 50%;
+    }
+  }
 }
 
-nav a {
-  display: block;
-  text-decoration: none;
-  color: #000000;
-  padding: 15px 5px;
-}
-
-nav a:hover {
-  background-color: #ff0000;
-  color: #f9f9f9;
-  -webkit-transition: color .2s linear;
-}
 
 article {
   font-size:16px;

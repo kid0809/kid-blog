@@ -7,7 +7,6 @@ import { checkStatus, parseJSON } from '../utils/fetch'
 /* global API_SERVER */
 
 class Header extends React.Component {
-
   logout(event) {
     event.preventDefault()
     const { dispatch } = this.props
@@ -18,8 +17,7 @@ class Header extends React.Component {
     })
       .then((res) => checkStatus(res))
       .then((res) => parseJSON(res))
-      .then((success) => {
-        console.log(JSON.stringify(success))
+      .then(() => {
         sessionStorage.removeItem('user')
         dispatch(logout())
         dispatch(push('/home'))
