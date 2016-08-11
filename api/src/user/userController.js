@@ -3,6 +3,7 @@
 import crypto from 'crypto'
 import _ from 'lodash'
 import User from './userModel'
+import jwt from 'jsonwebtoken'
 import config from '../../../config/config'
 
 
@@ -43,7 +44,6 @@ module.exports = {
           gender: data2.gender
         }
 
-        req.session.user = user
         res.json(user)
       })
     })
@@ -68,8 +68,8 @@ module.exports = {
         email: data.email
       }
 
-      req.session.user = user
-      res.json(user)
+      const token = jwt.sign(user, config.secret)
+      res.json({token})
     })
   },
 
@@ -79,7 +79,6 @@ module.exports = {
   logout: (req, res) => {
     console.log(req.session)
     if (req.session.user) {
-      req.session.user = null
       res.status(200).json('success')
     } else {
       res.status(401).json('error')
@@ -89,11 +88,11 @@ module.exports = {
   /*******************************************
    * 判断用户是否登录
    *******************************************/
-  isLogin: (req, res) => {
-    if (req.session.user) {
-      res.status(200).json(req.session.user)
-    } else {
-      res.status(401).json('error')
-    }
-  }
+  // isLogin: (req, res) => {
+  //   if (req.session.user) {
+  //     res.status(200).json(req.session.user)
+  //   } else {
+  //     res.status(401).json('error')
+  //   }
+  // }
 }

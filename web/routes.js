@@ -11,13 +11,13 @@ import Post from './src/components/Post'
 
 
 function isLogin(nextState, replaceState) {
-  if (!!window.sessionStorage.user && nextState.location.pathname.match('/dashboard')) {
+  if (!!window.localStorage.token && nextState.location.pathname.match('/dashboard')) {
     replaceState('/home')
   }
 }
 
 function requireLogin(nextState, replace) {
-  if (!window.sessionStorage.user) {
+  if (!window.localStorage.token) {
     replace({
       pathname: '/dashboard',
       state: { nextPathname: nextState.location.pathname }

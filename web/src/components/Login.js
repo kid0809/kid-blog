@@ -1,7 +1,7 @@
 import React from 'react'
 import { checkStatus, parseJSON } from '../utils/fetch'
 import { push } from 'react-router-redux'
-import { login } from '../actions'
+import { loginUser } from '../actions'
 import { Form, FormGroup, Col, FormControl, ControlLabel, Button } from 'react-bootstrap'
 
 /* global API_SERVER */
@@ -25,25 +25,26 @@ class Login extends React.Component {
       password: password
     }
 
-    fetch(`${API_SERVER}/api/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload),
-      credentials: 'include'
-    })
-      .then((res) => checkStatus(res))
-      .then((res) => parseJSON(res))
-      .then((success) => {
-        console.log(JSON.stringify(success))
-        sessionStorage.setItem('user', JSON.stringify(success))
-        dispatch(login())
-        dispatch(push('/home'))
-      })
-      .catch((error) => {
-        console.log('request failed', error)
-      })
+    dispatch(loginUser(payload))
+    // fetch(`${API_SERVER}/api/login`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(payload),
+    //   credentials: 'include'
+    // })
+    //   .then((res) => checkStatus(res))
+    //   .then((res) => parseJSON(res))
+    //   .then((success) => {
+    //     console.log(JSON.stringify(success))
+    //     sessionStorage.setItem('user', JSON.stringify(success))
+    //     dispatch(login())
+    //     dispatch(push('/home'))
+    //   })
+    //   .catch((error) => {
+    //     console.log('request failed', error)
+    //   })
   }
 
   render() {
