@@ -4,10 +4,10 @@ import path    from 'path'
 import http    from 'http'
 import express from 'express'
 import config  from '../config/config'
-import mongoose from 'mongoose'
+// import mongoose from 'mongoose'
 
-const uri = `mongodb://localhost/${config.db}`
-global.db = mongoose.createConnection(uri)
+// const uri = `mongodb://localhost/${config.db}`
+// global.db = mongoose.createConnection(uri)
 
 const app = module.exports = express()
 

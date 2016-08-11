@@ -2,18 +2,23 @@ import React from 'react'
 import { checkStatus, parseJSON } from '../utils/fetch'
 import { push } from 'react-router-redux'
 import { login } from '../actions'
+import { Form, FormGroup, Col, FormControl, ControlLabel, Button } from 'react-bootstrap'
 
 /* global API_SERVER */
 
 class Login extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      loginname: '',
+      password: ''
+    }
   }
 
   clickHandle() {
     const { dispatch } = this.props
-    const loginname = this.refs.loginname.value
-    const password = this.refs.password.value
+    const loginname = this.state.loginname
+    const password = this.state.password
 
     const payload = {
       loginName: loginname,
@@ -43,12 +48,36 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
-        用户名：<input type="text" ref="loginname" />
-        <br />
-        密码： <input type="password" ref="password" />
-        <br />
-        <button onClick={this.clickHandle.bind(this)}>登陆</button>
+      <div className="login-wrapper">
+        <div style={{ width: '400px' }}>
+          <Form horizontal>
+            <FormGroup controlId="formHorizontalEmail">
+              <Col componentClass={ControlLabel} sm={3}>
+                用户名
+              </Col>
+              <Col sm={9}>
+                <FormControl type="text" placeholder="用户名" value={this.state.loginname} onChange={(event) => this.setState({ loginname: event.target.value })} />
+              </Col>
+            </FormGroup>
+
+            <FormGroup controlId="formHorizontalPassword">
+              <Col componentClass={ControlLabel} sm={3}>
+                密码
+              </Col>
+              <Col sm={9}>
+                <FormControl type="password" placeholder="密码" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} />
+              </Col>
+            </FormGroup>
+
+            <FormGroup>
+              <Col smOffset={3} sm={9}>
+                <Button onClick={this.clickHandle.bind(this)}>
+                  登录
+                </Button>
+              </Col>
+            </FormGroup>
+          </Form>
+        </div>
       </div>
     )
   }

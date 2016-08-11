@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from '../db'
 
 // 创建schema
 const userSchema = new mongoose.Schema({
@@ -13,4 +13,4 @@ const userSchema = new mongoose.Schema({
 })
 
 // 创建model
-module.exports = db.model('users', userSchema) // users为创建或选中的集合
+module.exports = mongoose.model('users', userSchema) // users为创建或选中的集合

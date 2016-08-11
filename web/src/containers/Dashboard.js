@@ -4,6 +4,7 @@ import Nav from '../components/Nav'
 import Header from '../components/Header'
 import { checkStatus, parseJSON } from '../utils/fetch'
 import { login } from '../actions'
+import classNames from 'classnames'
 
 /* global API_SERVER */
 
@@ -27,14 +28,16 @@ class Dashboard extends React.Component {
       })
   }
 
+
   render() {
     const { user, dispatch } = this.props
     const { islogin } = user
+    const style = classNames({ 'main-wrapper': true }, { 'nav-left': islogin })
     return (
       <div>
         <Header islogin={islogin} dispatch={dispatch} />
-        <Nav islogin={islogin} dispatch={dispatch} />
-        <div className="main-wrapper">
+        {islogin ? <Nav /> : null}
+        <div className={style}>
           {this.props.children && React.cloneElement(this.props.children, {
             dispatch: dispatch
           })}

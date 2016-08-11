@@ -20,7 +20,7 @@ class Header extends React.Component {
       .then(() => {
         sessionStorage.removeItem('user')
         dispatch(logout())
-        dispatch(push('/home'))
+        dispatch(push('/dashboard'))
       })
       .catch((error) => {
         console.log('request failed', error)
@@ -30,8 +30,7 @@ class Header extends React.Component {
   renderNotLogin() {
     return (
       <ul>
-        <li><Link to={{ pathname: '/home' }} activeStyle={{ color: '#6556e2' }}>主页</Link></li>
-        <li><Link to={{ pathname: '/login' }} activeStyle={{ color: '#6556e2' }}>登录</Link></li>
+        <li><Link to={{ pathname: '/dashboard' }} activeStyle={{ color: '#6556e2' }}>登录</Link></li>
       </ul>
     )
   }
