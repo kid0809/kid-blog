@@ -1,8 +1,12 @@
 import * as Types from '../constants/ActionTypes'
 import { checkStatus, parseJSON } from '../utils/fetch'
-// import { CALL_API, getJSON } from 'redux-api-middleware'
+import { push } from 'react-router-redux'
 import jwtDecode from 'jwt-decode'
 import fetch from 'isomorphic-fetch'
+import Notification from 'rc-notification'
+
+
+const notification = Notification.newInstance()
 
 /* global API_SERVER */
 
@@ -16,8 +20,13 @@ export function loginUserSuccess(token) {
   }
 }
 
-export function loginUserFailure(error) {
+function loginUserFailure(error) {
   localStorage.removeItem('token')
+  if (error.response.status === 404) {
+    notification.notice({
+      content: '账号或密码错误'
+    })
+  }
   return {
     type: Types.LOGIN_USER_FAILURE,
     payload: {
@@ -27,7 +36,7 @@ export function loginUserFailure(error) {
   }
 }
 
-export function loginUserRequest() {
+function loginUserRequest() {
   return {
     type: Types.LOGIN_USER_REQUEST
   }
@@ -47,10 +56,10 @@ export function loginUser(data) {
       .then(checkStatus)
       .then(parseJSON)
       .then(res => {
-        console.log(res)
         try {
-          const decoded = jwtDecode(res.token)
+          jwtDecode(res.token)
           dispatch(loginUserSuccess(res.token))
+          dispatch(push('/home'))
         } catch (err) {
           dispatch(loginUserFailure({
             response: {
@@ -72,4 +81,20 @@ export function logout() {
   return {
     type: Types.USER_LOGOUT
   }
+  // fetch(`${API_SERVER}/api/logout`, {
+  //   method: 'GET',
+  //   credentials: 'include',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Bearer ${token}`
+  //   }
+  // })
+  // .then(checkStatus)
+  // .then(parseJSON)
+  // .then(res => {
+  //   console.log(res.token)
+  // })
+  // .catch(err => {
+  //   console.log(err)
+  // })
 }

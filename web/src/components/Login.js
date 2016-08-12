@@ -1,6 +1,4 @@
 import React from 'react'
-import { checkStatus, parseJSON } from '../utils/fetch'
-import { push } from 'react-router-redux'
 import { loginUser } from '../actions'
 import { Form, FormGroup, Col, FormControl, ControlLabel, Button } from 'react-bootstrap'
 

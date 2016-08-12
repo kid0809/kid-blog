@@ -7,11 +7,12 @@ import routes from './routes'
 import configureStore from './src/store/configureStore'
 import DevTools from './src/containers/DevTools'
 import { loginUserSuccess } from './src/actions'
+import 'rc-notification/assets/index.css'
 
 const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
 
-let token = localStorage.getItem('token')
+const token = localStorage.getItem('token')
 if (token !== null) {
   store.dispatch(loginUserSuccess(token))
 }

@@ -28,12 +28,7 @@ class MdEditor extends React.Component {
 
   // event handlers
   onChange() {
-    this.isdirty = true // set dirty
-    if (this.ltr) clearTimeout(this.ltr)
-
-    this.ltr = setTimeout(() => {
-      this.setState({ result: marked(this.textControl.value) }) // change state
-    }, 300)
+    this.setState({ result: marked(this.textControl.value) }) // change state
   }
 
 

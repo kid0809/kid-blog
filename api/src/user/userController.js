@@ -30,7 +30,7 @@ module.exports = {
       }
 
       if (data1) {
-        return res.json('登录名已存在')
+        return res.status(403).json('登录名已存在')
       }
 
       User.create(newUser, (err2, data2) => {
@@ -44,7 +44,7 @@ module.exports = {
           gender: data2.gender
         }
 
-        res.json(user)
+        res.status(200).json(user)
       })
     })
   },
@@ -59,8 +59,9 @@ module.exports = {
 
 
     User.findOne({ loginName: loginName, password: passwordhash }, (err, data) => {
-      if(err) return res.json(err)
+      if (err) return res.json(err)
 
+      if (data === null) return res.status(404).json('该用户不存在')
       const user = {
         userid: data._id,
         displayName: data.displayName,
@@ -68,21 +69,17 @@ module.exports = {
         email: data.email
       }
 
-      const token = jwt.sign(user, config.secret)
-      res.json({token})
+      const token = jwt.sign(user, key)
+      res.status(200).json({token})
     })
   },
 
   /*******************************************
    * 用户登出
    *******************************************/
-  logout: (req, res) => {
-    console.log(req.session)
-    if (req.session.user) {
-      res.status(200).json('success')
-    } else {
-      res.status(401).json('error')
-    }
+  logout: (err, req, res) => {
+    console.log(err)
+    res.json({token: '111'})
   },
 
   /*******************************************

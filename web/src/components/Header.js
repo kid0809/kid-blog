@@ -12,7 +12,6 @@ class Header extends React.Component {
 
     dispatch(logout())
     dispatch(push('/dashboard'))
-
   }
 
   renderNotLogin() {
