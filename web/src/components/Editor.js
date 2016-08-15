@@ -27,8 +27,11 @@ class MdEditor extends React.Component {
   }
 
   // event handlers
-  onChange() {
-    this.setState({ result: marked(this.textControl.value) }) // change state
+  onChange(event) {
+    const { contentChange } = this.props
+    const content = event.target.value
+    contentChange(content)
+    // this.setState({ result: marked(this.textControl.value) }) // change state
   }
 
 
@@ -87,6 +90,8 @@ class MdEditor extends React.Component {
 
   // default text processors
   preInputText(text, preStart, preEnd) {
+    const { contentChange } = this.props
+
     const start = this.textControl.selectionStart
     const end = this.textControl.selectionEnd
     const origin = this.textControl.value
@@ -99,7 +104,9 @@ class MdEditor extends React.Component {
     this.textControl.value = origin.slice(0, start) + text + origin.slice(end)
     // pre-select
     this.textControl.setSelectionRange(start + preStart, start + preEnd)
-    this.setState({ result: marked(this.textControl.value) }) // change state
+
+    contentChange(this.textControl.value)
+    // this.setState({ result: marked(this.textControl.value) }) // change state
   }
 
   boldText() {
@@ -111,7 +118,7 @@ class MdEditor extends React.Component {
   }
 
   linkText() {
-    this.preInputText('[链接文本](www.yourlink.com)', 1, 5)
+    this.preInputText('[链接文本](http://www.yourlink.com)', 1, 5)
   }
 
   blockquoteText() {
@@ -150,9 +157,9 @@ class MdEditor extends React.Component {
           {this.getToolBar()}
         </div>
         <div className={editorClass}>
-          <textarea ref="editor" name="content" onChange={this.onChange.bind(this)}></textarea>{/* style={{height: this.state.editorHeight + 'px'}} */}
+          <textarea ref="editor" name="content" value={this.props.content} onChange={this.onChange.bind(this)}></textarea>{/* style={{height: this.state.editorHeight + 'px'}} */}
         </div>
-        <div className={previewClass} ref="preview" dangerouslySetInnerHTML={{ __html: this.state.result }}></div>
+        <div className={previewClass} ref="preview" dangerouslySetInnerHTML={{ __html: marked(this.props.content) }}></div>
         <div className="md-spliter"></div>
       </div>
     )

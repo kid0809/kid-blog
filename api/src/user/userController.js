@@ -59,9 +59,9 @@ module.exports = {
 
 
     User.findOne({ loginName: loginName, password: passwordhash }, (err, data) => {
-      if (err) return res.json(err)
+      if (err) return res.send(err)
 
-      if (data === null) return res.status(404).json('该用户不存在')
+      if (data === null) return res.status(404).send('账号或密码错误')
       const user = {
         userid: data._id,
         displayName: data.displayName,
@@ -69,7 +69,7 @@ module.exports = {
         email: data.email
       }
 
-      const token = jwt.sign(user, key)
+      const token = jwt.sign(user, key, {expiresIn: '24h'})
       res.status(200).json({token})
     })
   },
@@ -77,8 +77,8 @@ module.exports = {
   /*******************************************
    * 用户登出
    *******************************************/
-  logout: (err, req, res) => {
-    console.log(err)
+  logout: (req, res) => {
+    console.log(req.user)
     res.json({token: '111'})
   },
 
