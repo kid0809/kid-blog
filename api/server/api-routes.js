@@ -1,6 +1,7 @@
 'use strict'
 
 import User from '../src/user/userController'
+import Article from '../src/article/articleController'
 import jwt from 'jsonwebtoken'
 import expressJWT from 'express-jwt'
 import config from '../../config/config'
@@ -9,11 +10,13 @@ module.exports = (express, env, app) => {
 
   const router = express.Router()
 
+  router
+    .post('/regist', User.regist)
+    .post('/login', User.login)
+    .get('/logout', expressJWT({secret: config.secret}), User.logout)
 
-
-  router.post('/regist', User.regist)
-  router.post('/login', User.login)
-  router.get('/logout', expressJWT({secret: config.secret}), User.logout)
+  router
+    .post('/article/create', expressJWT({secret: config.secret}), Article.createArticle)
 
   // Route not found - set 404
   router.get('*', (req, res) => {

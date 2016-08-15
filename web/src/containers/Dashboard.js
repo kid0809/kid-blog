@@ -17,7 +17,8 @@ class Dashboard extends React.Component {
         {isAuthenticated ? <Nav /> : null}
         <div className={style}>
           {this.props.children && React.cloneElement(this.props.children, {
-            dispatch: dispatch
+            dispatch,
+            token
           })}
         </div>
       </div>
