@@ -1,8 +1,9 @@
 'use strict'
 
 import React from 'react'
-import { Route } from 'react-router'
+import { Route, IndexRoute, IndexRedirect } from 'react-router'
 import Dashboard from './src/containers/Dashboard'
+import App from './src/containers/App'
 
 import Home from './src/components/Home'
 import Login from './src/components/Login'
@@ -12,7 +13,7 @@ import Post from './src/components/Post'
 
 function isLogin(nextState, replaceState) {
   if (!!window.localStorage.token && nextState.location.pathname.match('/dashboard')) {
-    replaceState('/home')
+    replaceState('/dashboard/home')
   }
 }
 
@@ -26,10 +27,14 @@ function requireLogin(nextState, replace) {
 }
 
 export default (
-  <Route path="/" component={Dashboard}>
-    <Route path="/home" component={Home} onEnter={requireLogin} />
-    <Route path="/dashboard" component={Login} onEnter={isLogin} />
-    <Route path="/reg" component={Reg} onEnter={requireLogin} />
-    <Route path="/post" component={Post} onEnter={requireLogin} />
+  <Route path="/">
+    <IndexRoute component={App} />
+    <Route path="dashboard" component={Dashboard}>
+      <IndexRedirect to="login" />
+      <Route path="login" component={Login} onEnter={isLogin} />
+      <Route path="reg" component={Reg} />
+      <Route path="home" component={Home} onEnter={requireLogin} />
+      <Route path="post" component={Post} onEnter={requireLogin} />
+    </Route>
   </Route>
 )

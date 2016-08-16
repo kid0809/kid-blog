@@ -58,7 +58,7 @@ export function loginUser(data) {
         try {
           jwtDecode(res.token)
           dispatch(loginUserSuccess(res.token))
-          dispatch(push('/home'))
+          dispatch(push('/dashboard/home'))
         } catch (err) {
           dispatch(loginUserFailure({
             response: {

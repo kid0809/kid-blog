@@ -52,10 +52,10 @@ class Login extends React.Component {
           <Form horizontal>
             <FormGroup controlId="formHorizontalEmail">
               <Col componentClass={ControlLabel} sm={3}>
-                用户名
+                登录名
               </Col>
               <Col sm={9}>
-                <FormControl type="text" placeholder="用户名" value={this.state.loginname} onChange={(event) => this.setState({ loginname: event.target.value })} />
+                <FormControl type="text" placeholder="登录名" value={this.state.loginname} onChange={(event) => this.setState({ loginname: event.target.value })} />
               </Col>
             </FormGroup>
 

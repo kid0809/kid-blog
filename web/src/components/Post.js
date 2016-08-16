@@ -4,7 +4,6 @@ import Notification from 'rc-notification'
 import { checkStatus, parseJSON } from '../utils/fetch'
 import { FormControl, Button } from 'react-bootstrap'
 import Select, { Option } from 'rc-select'
-import 'rc-select/assets/index.css'
 
 const notification = Notification.newInstance()
 

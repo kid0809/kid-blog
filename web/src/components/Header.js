@@ -17,7 +17,8 @@ class Header extends React.Component {
   renderNotLogin() {
     return (
       <ul>
-        <li><Link to={{ pathname: '/dashboard' }} activeStyle={{ color: '#6556e2' }}>登录</Link></li>
+        <li><Link to={{ pathname: '/dashboard/login' }} activeStyle={{ color: '#6556e2' }}>登录</Link></li>
+        <li><Link to={{ pathname: '/dashboard/reg' }} activeStyle={{ color: '#6556e2' }}>注册</Link></li>
       </ul>
     )
   }
@@ -25,9 +26,8 @@ class Header extends React.Component {
   renderLogin() {
     return (
       <ul>
-        <li><Link to={{ pathname: '/home' }} activeStyle={{ color: '#6556e2' }}>主页</Link></li>
-        <li><Link to={{ pathname: '/reg' }} activeStyle={{ color: '#6556e2' }}>注册</Link></li>
-        <li><Link to={{ pathname: '/post' }} activeStyle={{ color: '#6556e2' }}>发布</Link></li>
+        <li><Link to={{ pathname: '/dashboard/home' }} activeStyle={{ color: '#6556e2' }}>主页</Link></li>  
+        <li><Link to={{ pathname: '/dashboard/post' }} activeStyle={{ color: '#6556e2' }}>发布</Link></li>
         <li><a href="#" onClick={this.userLogout.bind(this)}>登出</a></li>
       </ul>
     )
