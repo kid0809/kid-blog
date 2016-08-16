@@ -22,6 +22,7 @@ export default (state = {
         isAuthenticated: true,
         token: action.payload.token,
         userName: jwtDecode(action.payload.token).displayName,
+        role: jwtDecode(action.payload.token).role,
         statusText: 'You have been successfully logged in.'
       })
 

@@ -2,12 +2,14 @@ import mongoose from '../db'
 
 // 创建schema
 const userSchema = new mongoose.Schema({
-  loginName: String,
-  displayName: String,
-  password: String,
+  loginName: { type: String, required: true },
+  displayName: { type: String, required: true },
+  password: { type: String, required: true },
   avatar: String,
   email: String,
   gender: String,
+  role: { type: String, enum: ['admin', 'member'], default: 'member'},
+  permission: Array,
   creatAt: { type: Date, default: Date.now },
   updateAt: { type: Date, default: Date.now }
 })

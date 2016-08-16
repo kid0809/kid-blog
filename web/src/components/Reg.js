@@ -8,13 +8,14 @@ class Reg extends React.Component {
   }
 
   clickHandle() {
-    const loginname = this.refs.loginname.value
-    const displayname = this.refs.displayname.value
+    const loginName = this.refs.loginname.value
+    const displayName = this.refs.displayname.value
     const password = this.refs.password.value
     const password2 = this.refs.password2.value
     const avatar = this.refs.avatar.value
     const email = this.refs.email.value
     const gender = this.refs.gender.value
+    const code = this.refs.code.value
 
     if (password !== password2) {
       console.log('两次密码输入不一致')
@@ -22,12 +23,13 @@ class Reg extends React.Component {
     }
     
     const payload = {
-      loginName: loginname,
-      displayName: displayname,
-      password: password,
-      avatar: avatar,
-      email: email,
-      gender: gender
+      loginName,
+      displayName,
+      password,
+      avatar,
+      email,
+      gender,
+      code
     }
 
     fetch(`${API_SERVER}/api/regist`, {
@@ -61,6 +63,8 @@ class Reg extends React.Component {
         头像： <input type="text" ref="avatar" />
         <br />
         邮箱： <input type="text" ref="email" />
+        <br />
+        注册码： <input type="text" ref="code" />
         <br />
         性别：
         <select ref="gender">

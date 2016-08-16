@@ -47,7 +47,6 @@ export function loginUser(data) {
     dispatch(loginUserRequest())
     return fetch(`${API_SERVER}/api/login`, {
       method: 'POST',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -98,3 +97,49 @@ export function logout() {
   //   console.log(err)
   // })
 }
+
+function articleSuccess(data) {
+  return {
+    type: Types.ARTICLE_SUCCESS,
+    payload: {
+      data
+    }
+  }
+}
+
+function articleFailure(error) {
+  return {
+    type: Types.ARTICLE_FAILURE,
+    payload: {
+      status: error.response.status,
+      statusText: error.response.statusText
+    }
+  }
+}
+
+function articleRequest() {
+  return {
+    type: Types.ARTICLE_REQUEST
+  }
+}
+
+export function article() {
+  return (dispatch) => {
+    dispatch(articleRequest())
+    return fetch(`${API_SERVER}/api/article/all`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(checkStatus)
+      .then(parseJSON)
+      .then(res => {
+        dispatch(articleSuccess(res.data))
+      })
+      .catch(error => {
+        dispatch(articleFailure(error))
+      })
+  }
+}
+

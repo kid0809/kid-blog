@@ -10,11 +10,16 @@ module.exports = {
    * 创建文章
    *******************************************/
   createArticle: (req, res) => {
-    const author = req.user.displayName
+    const { displayName, role } = req.user
+
+    if (role !== 'admin') {
+      return res.status(401).json('该用户没有权限创建文章')
+    }
+
     const newArticle = {
-      author,
+      author: displayName,
       title: _.trim(req.body.title),
-      classify: req.body.classify,
+      category: req.body.category,
       content: _.trim(req.body.content)
     }
 
@@ -22,6 +27,17 @@ module.exports = {
       if(err) return res.json(err)
 
       res.status(200).json('文章创建成功')
+    })
+  },
+
+  /*******************************************
+   * 获取全部文章列表
+   *******************************************/
+  articleList: (req, res) => {
+    Article.find((err, data) => {
+      if(err) return res.json(err)
+
+      res.status(200).json({data})
     })
   }
 }

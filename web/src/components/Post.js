@@ -15,11 +15,11 @@ class Post extends React.Component {
     super(props)
     this.state = {
       title: '',
-      classify: [],
+      category: [],
       content: ''
     }
     this.titleChange = this.titleChange.bind(this)
-    this.classifyChange = (value) => this.classify(value)
+    this.categoryChange = (value) => this.category(value)
     this.contentChange = this.contentChange.bind(this)
     this.publish = this.publish.bind(this)
   }
@@ -31,9 +31,9 @@ class Post extends React.Component {
     })
   }
 
-  classify(value) {
+  category(value) {
     this.setState({
-      classify: value
+      category: value
     })
   }
 
@@ -47,11 +47,10 @@ class Post extends React.Component {
     const { token } = this.props
     const data = {
       title: this.state.title,
-      classify: this.state.classify,
+      category: this.state.category,
       content: this.state.content
     }
 
-    console.log(data)
 
     fetch(`${API_SERVER}/api/article/create`, {
       method: 'POST',
@@ -68,9 +67,23 @@ class Post extends React.Component {
       notification.notice({
         content: '文章创建成功'
       })
+      this.setState({
+        title: '',
+        category: [],
+        content: ''
+      })
     })
     .catch(err => {
       console.log(err)
+      if (err.response.status === 401) {
+        notification.notice({
+          content: '没有权限创建文章'
+        })
+      } else {
+        notification.notice({
+          content: '服务器错误'
+        })
+      }
     })
   }
 
@@ -82,13 +95,13 @@ class Post extends React.Component {
 
         <h4 style={{ marginTop: '20px' }}>文章分类</h4>
         <Select
-          value={this.state.classify}
+          value={this.state.category}
           animation="slide-up"
           choiceTransitionName="rc-select-selection__choice-zoom"
           style={{ width: '100%' }}
           multiple
           placeholder="选择分类"
-          onChange={this.classifyChange}
+          onChange={this.categoryChange}
         >
           <Option key="0" value="技术">技术</Option>
           <Option key="1" value="心情">心情</Option>

@@ -16,6 +16,7 @@ module.exports = (express, env, app) => {
     .get('/logout', expressJWT({secret: config.secret}), User.logout)
 
   router
+    .get('/article/all', Article.articleList)
     .post('/article/create', expressJWT({secret: config.secret}), Article.createArticle)
 
   // Route not found - set 404

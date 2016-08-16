@@ -5,7 +5,9 @@ export function checkStatus(response) {
     return response
   }
   const error = new Error(response.statusText)
+  console.log(error)
   error.response = response
+  console.log(error.response)
   throw error
 }
 

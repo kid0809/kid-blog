@@ -2,10 +2,10 @@ import mongoose from '../db'
 
 // 创建schema
 const articleSchema = new mongoose.Schema({
-  author: String,
-  title: String,
-  classify: Array,
-  content: String,
+  author: { type: String, required: true },
+  title: { type: String, required: true },
+  category: { type: Array, required: true },
+  content: { type: String, required: true },
   publish: { type: Boolean, default: false },
   creatAt: { type: Date, default: Date.now },
   updateAt: { type: Date, default: Date.now }

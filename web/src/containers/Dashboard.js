@@ -8,7 +8,7 @@ import classNames from 'classnames'
 
 class Dashboard extends React.Component {
   render() {
-    const { user, dispatch } = this.props
+    const { user, dispatch, article } = this.props
     const { isAuthenticated, token } = user
     const style = classNames({ 'main-wrapper': true }, { 'nav-left': isAuthenticated })
     return (
@@ -18,7 +18,8 @@ class Dashboard extends React.Component {
         <div className={style}>
           {this.props.children && React.cloneElement(this.props.children, {
             dispatch,
-            token
+            token,
+            article
           })}
         </div>
       </div>
@@ -29,9 +30,9 @@ class Dashboard extends React.Component {
 
 // Redux 回传值
 function mapStateToProps(state) {
-  const { user } = state
+  const { user, article } = state
 
-  return { user }
+  return { user, article }
 }
 
 export default connect(mapStateToProps)(Dashboard)
