@@ -12,6 +12,7 @@ $fontColor: #fff;
   width: 100%;
   background: $hearderColor;
   color: $fontColor;
+  z-index: 99;
   .logo {
     font-size: 22px;
     font-weight: 600px;

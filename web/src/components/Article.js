@@ -6,7 +6,7 @@ class Article extends React.Component {
   render() {
     console.log(this.props.location.state)
     return (
-      <div>
+      <div className="markdown">
         <h2>{this.props.location.state.title}</h2>
         <div>
           <span style={{ color: '#999999' }}>标签：{this.props.location.state.category.toString()}，</span>

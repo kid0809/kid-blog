@@ -1,6 +1,8 @@
 import React from 'react'
 import { loginUser } from '../actions'
-import { Form, FormGroup, Col, FormControl, ControlLabel, Button } from 'react-bootstrap'
+import { Form, Input, Button } from 'antd'
+
+const FormItem = Form.Item
 
 /* global API_SERVER */
 
@@ -24,57 +26,36 @@ class Login extends React.Component {
     }
 
     dispatch(loginUser(payload))
-    // fetch(`${API_SERVER}/api/login`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(payload),
-    //   credentials: 'include'
-    // })
-    //   .then((res) => checkStatus(res))
-    //   .then((res) => parseJSON(res))
-    //   .then((success) => {
-    //     console.log(JSON.stringify(success))
-    //     sessionStorage.setItem('user', JSON.stringify(success))
-    //     dispatch(login())
-    //     dispatch(push('/home'))
-    //   })
-    //   .catch((error) => {
-    //     console.log('request failed', error)
-    //   })
   }
 
   render() {
+    const formItemLayout = {
+      labelCol: { span: 6 },
+      wrapperCol: { span: 14 },
+    }
+
     return (
       <div className="login-wrapper">
         <div style={{ width: '400px' }}>
           <Form horizontal>
-            <FormGroup controlId="formHorizontalEmail">
-              <Col componentClass={ControlLabel} sm={3}>
-                登录名
-              </Col>
-              <Col sm={9}>
-                <FormControl type="text" placeholder="登录名" value={this.state.loginname} onChange={(event) => this.setState({ loginname: event.target.value })} />
-              </Col>
-            </FormGroup>
+            <FormItem
+              {...formItemLayout}
+              label="登录名"
+            >
+              <Input type="text" placeholder="请输入登录名" value={this.state.loginname} onChange={(event) => this.setState({ loginname: event.target.value })} />
+            </FormItem>
+            <FormItem
+              {...formItemLayout}
+              label="密码"
+            >
+              <Input type="password" placeholder="请输入密码" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} />
+            </FormItem>
 
-            <FormGroup controlId="formHorizontalPassword">
-              <Col componentClass={ControlLabel} sm={3}>
-                密码
-              </Col>
-              <Col sm={9}>
-                <FormControl type="password" placeholder="密码" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} />
-              </Col>
-            </FormGroup>
-
-            <FormGroup>
-              <Col smOffset={3} sm={9}>
-                <Button onClick={this.clickHandle.bind(this)}>
-                  登录
-                </Button>
-              </Col>
-            </FormGroup>
+            <FormItem
+              wrapperCol={{ span: 4, offset: 6 }}
+            >
+              <Button type="primary" onClick={this.clickHandle.bind(this)} size="default">登录</Button>
+            </FormItem>
           </Form>
         </div>
       </div>
@@ -82,5 +63,6 @@ class Login extends React.Component {
   }
 }
 
+Login = Form.create()(Login)
 
 export default Login

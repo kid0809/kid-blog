@@ -1,11 +1,10 @@
 import React from 'react'
 import Editor from './Editor'
-import Notification from 'rc-notification'
 import { checkStatus, parseJSON } from '../utils/fetch'
-import { FormControl, Button } from 'react-bootstrap'
-import Select, { Option } from 'rc-select'
+import { Input, Button, Select, message } from 'antd'
 
-const notification = Notification.newInstance()
+
+const Option = Select.Option
 
 /* global API_SERVER */
 
@@ -63,9 +62,8 @@ class Post extends React.Component {
     .then(parseJSON)
     .then(res => {
       console.log(res)
-      notification.notice({
-        content: '文章创建成功'
-      })
+      message.success('文章创建成功')
+
       this.setState({
         title: '',
         category: [],
@@ -75,13 +73,9 @@ class Post extends React.Component {
     .catch(err => {
       console.log(err)
       if (err.response.status === 401) {
-        notification.notice({
-          content: '没有权限创建文章'
-        })
+        message.error('没有权限创建文章')
       } else {
-        notification.notice({
-          content: '服务器错误'
-        })
+        message.error('服务器错误')
       }
     })
   }
@@ -90,17 +84,16 @@ class Post extends React.Component {
     return (
       <div>
         <h4>文章标题</h4>
-        <FormControl type="text" placeholder="文章标题" value={this.state.title} onChange={this.titleChange} />
+        <Input placeholder="文章标题" value={this.state.title} onChange={this.titleChange} size="large" />
 
         <h4 style={{ marginTop: '20px' }}>文章分类</h4>
         <Select
           value={this.state.category}
-          animation="slide-up"
-          choiceTransitionName="rc-select-selection__choice-zoom"
           style={{ width: '100%' }}
           multiple
           placeholder="选择分类"
           onChange={this.categoryChange}
+          size="large"
         >
           <Option key="0" value="技术">技术</Option>
           <Option key="1" value="心情">心情</Option>
@@ -112,7 +105,7 @@ class Post extends React.Component {
         <h4 style={{ marginTop: '20px' }}>文章内容</h4>
         <Editor content={this.state.content} contentChange={this.contentChange} />
 
-        <Button bsStyle="primary" style={{ marginTop: '20px' }} onClick={this.publish}>
+        <Button type="primary" style={{ marginTop: '20px' }} onClick={this.publish}>
           发表文章
         </Button>
       </div>
