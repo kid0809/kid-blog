@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   gender: String,
   role: { type: String, enum: ['admin', 'member'], default: 'member'},
   permission: Array,
-  creatAt: { type: Date, default: Date.now },
+  createAt: { type: Date, default: Date.now },
   updateAt: { type: Date, default: Date.now }
 })
 

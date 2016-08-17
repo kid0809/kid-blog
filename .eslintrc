@@ -33,6 +33,7 @@
     "no-array-constructor": 0,
     "react/prefer-stateless-function": 0,
     "global-require": 0,
+    "no-underscore-dangle": 0,
 
     "new-cap": [
       2,

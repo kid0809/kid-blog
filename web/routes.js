@@ -9,6 +9,7 @@ import Home from './src/components/Home'
 import Login from './src/components/Login'
 import Reg from './src/components/Reg'
 import Post from './src/components/Post'
+import Article from './src/components/Article'
 
 
 function isLogin(nextState, replaceState) {
@@ -35,6 +36,7 @@ export default (
       <Route path="reg" component={Reg} />
       <Route path="home" component={Home} onEnter={requireLogin} />
       <Route path="post" component={Post} onEnter={requireLogin} />
+      <Route path="/blog/:id" component={Article} onEnter={requireLogin} />
     </Route>
   </Route>
 )

@@ -7,7 +7,7 @@ const articleSchema = new mongoose.Schema({
   category: { type: Array, required: true },
   content: { type: String, required: true },
   publish: { type: Boolean, default: false },
-  creatAt: { type: Date, default: Date.now },
+  createAt: { type: Date, default: Date.now },
   updateAt: { type: Date, default: Date.now }
 })
 

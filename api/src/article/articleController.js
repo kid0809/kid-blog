@@ -34,7 +34,7 @@ module.exports = {
    * 获取全部文章列表
    *******************************************/
   articleList: (req, res) => {
-    Article.find((err, data) => {
+    Article.find({}, null, {sort: {createAt: -1}}, (err, data) => {
       if(err) return res.json(err)
 
       res.status(200).json({data})
