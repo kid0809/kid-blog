@@ -42,6 +42,30 @@ module.exports = {
   },
 
   /*******************************************
+   * 获取已发布的文章列表
+   *******************************************/
+  articlePublishList: (req, res) => {
+    Article.find({publish: true}, null, {sort: {createAt: -1}}, (err, data) => {
+      if(err) return res.json(err)
+
+      res.status(200).json({data})
+    })
+  },
+
+  /*******************************************
+   * 获取分类并且已发布的文章列表
+   *******************************************/
+  articleListByCategory: (req, res) => {
+    const category = req.params.category
+
+    Article.find({publish: true, category: category}, null, {sort: {createAt: -1}}, (err, data) => {
+      if(err) return res.json(err)
+
+      res.status(200).json({data})
+    })
+  },
+
+  /*******************************************
    * 更新文章
    *******************************************/
   updateArticle: (req, res) => {

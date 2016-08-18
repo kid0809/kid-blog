@@ -17,6 +17,8 @@ module.exports = (express, env, app) => {
 
   router
     .get('/article/all', Article.articleList)
+    .get('/article/publish', Article.articlePublishList)
+    .get('/article/:category', Article.articleListByCategory)
     .post('/article/create', expressJWT({secret: config.secret}), Article.createArticle)
     .put('/article', expressJWT({secret: config.secret}), Article.updateArticle)
     .put('/article/publish', expressJWT({secret: config.secret}), Article.updatePublish)
