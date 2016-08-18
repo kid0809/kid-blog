@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import Nav from '../components/Nav'
 import Header from '../components/Header'
 import classNames from 'classnames'
-import 'rc-select/assets/index.css'
 
 /* global API_SERVER */
 
