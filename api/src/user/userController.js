@@ -13,6 +13,7 @@ module.exports = {
    *******************************************/
   regist: (req, res) => {
     const key = config.secret
+    console.log(req.body.password)
     const passwordhash = crypto.createHmac('sha1', key).update(_.trim(req.body.password)).digest('hex')
 
     let newUser = {}
@@ -37,7 +38,6 @@ module.exports = {
         gender: _.trim(req.body.gender)
       }
     }
-
 
     User.findOne({loginName: newUser.loginName}, (err1, data1) => {
       if (err1) {
@@ -70,6 +70,7 @@ module.exports = {
   login: (req, res) => {
     const key = config.secret
     const loginName = _.trim(req.body.loginName)
+    console.log(req.body.password)
     const passwordhash = crypto.createHmac('sha1', key).update(_.trim(req.body.password)).digest('hex')
 
 

@@ -23,7 +23,7 @@ class Reg extends React.Component {
 
   checkPass2(rule, value, callback) {
     const { getFieldValue } = this.props.form
-    if (value && value !== getFieldValue('passwd')) {
+    if (value && value !== getFieldValue('password')) {
       callback('两次输入密码不一致！')
     } else {
       callback()
@@ -81,7 +81,7 @@ class Reg extends React.Component {
       ]
     })
 
-    const passwdProps = getFieldProps('passwd', {
+    const passwdProps = getFieldProps('password', {
       rules: [
         { required: true, message: '请填写密码' },
         { validator: this.checkPass.bind(this) },

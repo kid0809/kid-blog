@@ -9,6 +9,7 @@ import Home from './src/components/Home'
 import Login from './src/components/Login'
 import Reg from './src/components/Reg'
 import Post from './src/components/Post'
+import UpdateArticle from './src/components/UpdateArticle'
 import Article from './src/components/Article'
 
 
@@ -37,6 +38,7 @@ export default (
       <Route path="home" component={Home} onEnter={requireLogin} />
       <Route path="post" component={Post} onEnter={requireLogin} />
       <Route path="/blog/:id" component={Article} onEnter={requireLogin} />
+      <Route path="/update/:id" component={UpdateArticle} onEnter={requireLogin} />
     </Route>
   </Route>
 )

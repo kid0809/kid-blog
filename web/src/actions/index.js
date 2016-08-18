@@ -3,10 +3,8 @@ import { checkStatus, parseJSON } from '../utils/fetch'
 import { push } from 'react-router-redux'
 import jwtDecode from 'jwt-decode'
 import fetch from 'isomorphic-fetch'
-import Notification from 'rc-notification'
+import { message } from 'antd'
 
-
-const notification = Notification.newInstance()
 
 /* global API_SERVER */
 
@@ -23,9 +21,7 @@ export function loginUserSuccess(token) {
 function loginUserFailure(error) {
   localStorage.removeItem('token')
   if (error.response.status === 404) {
-    notification.notice({
-      content: '账号或密码错误'
-    })
+    message.error('账号或密码错误')
   }
   return {
     type: Types.LOGIN_USER_FAILURE,
@@ -80,22 +76,6 @@ export function logout() {
   return {
     type: Types.USER_LOGOUT
   }
-  // fetch(`${API_SERVER}/api/logout`, {
-  //   method: 'GET',
-  //   credentials: 'include',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     Authorization: `Bearer ${token}`
-  //   }
-  // })
-  // .then(checkStatus)
-  // .then(parseJSON)
-  // .then(res => {
-  //   console.log(res.token)
-  // })
-  // .catch(err => {
-  //   console.log(err)
-  // })
 }
 
 function articleSuccess(data) {
@@ -143,3 +123,112 @@ export function article() {
   }
 }
 
+function publishSuccess(data) {
+  message.success('发布状态改变')
+  return {
+    type: Types.PUBLISH_ARTICLE_SUCCESS,
+    payload: {
+      id: data.id,
+      publish: data.publish
+    }
+  }
+}
+
+function publishFailure(error) {
+  if (error.response.status === 401) {
+    message.error('没有权限修改发布状态')
+  } else {
+    message.error('服务器错误')
+  }
+
+  return {
+    type: Types.PUBLISH_ARTICLE_FAILURE,
+    payload: {
+      status: error.response.status,
+      statusText: error.response.statusText
+    }
+  }
+}
+
+function publishRequest() {
+  return {
+    type: Types.PUBLISH_ARTICLE_REQUEST
+  }
+}
+
+export function publishArticle(data, token) {
+  return (dispatch) => {
+    dispatch(publishRequest())
+    return fetch(`${API_SERVER}/api/article/publish`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(data)
+    })
+      .then(checkStatus)
+      .then(parseJSON)
+      .then(() => {
+        dispatch(publishSuccess(data))
+      })
+      .catch(error => {
+        dispatch(publishFailure(error))
+      })
+  }
+}
+
+
+function deleteArticleSuccess(id) {
+  message.success('删除文章成功')
+  return {
+    type: Types.DELETE_ARTICLE_SUCCESS,
+    payload: {
+      id
+    }
+  }
+}
+
+function deleteArticleFailure(error) {
+  if (error.response.status === 401) {
+    message.error('没有权限删除文章')
+  } else {
+    message.error('服务器错误')
+  }
+
+  return {
+    type: Types.DELETE_ARTICLE_FAILURE,
+    payload: {
+      status: error.response.status,
+      statusText: error.response.statusText
+    }
+  }
+}
+
+function deleteArticleRequest() {
+  return {
+    type: Types.DELETE_ARTICLE_REQUEST
+  }
+}
+
+export function deleteArticle(id, token) {
+  return (dispatch) => {
+    dispatch(deleteArticleRequest())
+    return fetch(`${API_SERVER}/api/article`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ id })
+    })
+      .then(checkStatus)
+      .then(parseJSON)
+      .then(() => {
+        dispatch(deleteArticleSuccess(id))
+      })
+      .catch(error => {
+        dispatch(deleteArticleFailure(error))
+      })
+  }
+}

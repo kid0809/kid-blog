@@ -4,7 +4,6 @@ import marked from 'marked'
 
 class Article extends React.Component {
   render() {
-    console.log(this.props.location.state)
     return (
       <div className="markdown">
         <h2>{this.props.location.state.title}</h2>

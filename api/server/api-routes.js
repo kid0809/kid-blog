@@ -18,6 +18,9 @@ module.exports = (express, env, app) => {
   router
     .get('/article/all', Article.articleList)
     .post('/article/create', expressJWT({secret: config.secret}), Article.createArticle)
+    .put('/article', expressJWT({secret: config.secret}), Article.updateArticle)
+    .put('/article/publish', expressJWT({secret: config.secret}), Article.updatePublish)
+    .delete('/article', expressJWT({secret: config.secret}), Article.removeArticle)
 
   // Route not found - set 404
   router.get('*', (req, res) => {

@@ -45,7 +45,7 @@ module.exports = (app, env, config) => {
     // console.log(req.headers.origin);
     res.header("Access-Control-Allow-Origin", req.headers.origin)
     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization")
-    res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
     res.header("Access-Control-Allow-Credentials", "true")
     next()
     return
