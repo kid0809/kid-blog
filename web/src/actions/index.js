@@ -123,7 +123,7 @@ export function article() {
   }
 }
 
-function publishSuccess(data) {
+function publishArticleSuccess(data) {
   message.success('发布状态改变')
   return {
     type: Types.PUBLISH_ARTICLE_SUCCESS,
@@ -134,7 +134,7 @@ function publishSuccess(data) {
   }
 }
 
-function publishFailure(error) {
+function publishArticleFailure(error) {
   if (error.response.status === 401) {
     message.error('没有权限修改发布状态')
   } else {
@@ -150,7 +150,7 @@ function publishFailure(error) {
   }
 }
 
-function publishRequest() {
+function publishArticleRequest() {
   return {
     type: Types.PUBLISH_ARTICLE_REQUEST
   }
@@ -158,7 +158,7 @@ function publishRequest() {
 
 export function publishArticle(data, token) {
   return (dispatch) => {
-    dispatch(publishRequest())
+    dispatch(publishArticleRequest())
     return fetch(`${API_SERVER}/api/article/publish`, {
       method: 'PUT',
       headers: {
@@ -170,10 +170,10 @@ export function publishArticle(data, token) {
       .then(checkStatus)
       .then(parseJSON)
       .then(() => {
-        dispatch(publishSuccess(data))
+        dispatch(publishArticleSuccess(data))
       })
       .catch(error => {
-        dispatch(publishFailure(error))
+        dispatch(publishArticleFailure(error))
       })
   }
 }
@@ -229,6 +229,98 @@ export function deleteArticle(id, token) {
       })
       .catch(error => {
         dispatch(deleteArticleFailure(error))
+      })
+  }
+}
+
+// 获取已发布的文章
+function publishSuccess(data) {
+  return {
+    type: Types.PUBLISH_SUCCESS,
+    payload: {
+      data
+    }
+  }
+}
+
+function publishFailure(error) {
+  return {
+    type: Types.PUBLISH_FAILURE,
+    payload: {
+      status: error.response.status,
+      statusText: error.response.statusText
+    }
+  }
+}
+
+function publishRequest() {
+  return {
+    type: Types.PUBLISH_REQUEST
+  }
+}
+
+export function publish() {
+  return (dispatch) => {
+    dispatch(publishRequest())
+    return fetch(`${API_SERVER}/api/article/publish`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(checkStatus)
+      .then(parseJSON)
+      .then(res => {
+        dispatch(publishSuccess(res.data))
+      })
+      .catch(error => {
+        dispatch(publishFailure(error))
+      })
+  }
+}
+
+// 获取已发布的文章
+function catagoryArticleSuccess(data) {
+  return {
+    type: Types.CATEGORY_SUCCESS,
+    payload: {
+      data
+    }
+  }
+}
+
+function catagoryArticleFailure(error) {
+  return {
+    type: Types.CATEGORY_FAILURE,
+    payload: {
+      status: error.response.status,
+      statusText: error.response.statusText
+    }
+  }
+}
+
+function catagoryArticleRequest() {
+  return {
+    type: Types.CATEGORY_REQUEST
+  }
+}
+
+export function catagoryArticle(category) {
+  return (dispatch) => {
+    dispatch(catagoryArticleRequest())
+    return fetch(`${API_SERVER}/api/article/${category}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(checkStatus)
+      .then(parseJSON)
+      .then(res => {
+        dispatch(catagoryArticleSuccess(res.data))
+      })
+      .catch(error => {
+        dispatch(catagoryArticleFailure(error))
       })
   }
 }

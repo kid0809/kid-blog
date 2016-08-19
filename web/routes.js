@@ -6,6 +6,7 @@ import Dashboard from './src/containers/Dashboard'
 import App from './src/containers/App'
 
 import Home from './src/components/Home'
+import FrontHome from './src/components/FrontHome'
 import Login from './src/components/Login'
 import Reg from './src/components/Reg'
 import Post from './src/components/Post'
@@ -30,7 +31,10 @@ function requireLogin(nextState, replace) {
 
 export default (
   <Route path="/">
-    <IndexRoute component={App} />
+    <IndexRedirect to="index" />
+    <Route path="index" component={App}>
+      <IndexRoute component={FrontHome} />
+    </Route>
     <Route path="dashboard" component={Dashboard}>
       <IndexRedirect to="login" />
       <Route path="login" component={Login} onEnter={isLogin} />

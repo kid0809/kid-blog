@@ -53,10 +53,10 @@ class Home extends React.Component {
         return (
           <div>
             <Link to={{ pathname: `blog/${data._id}`, state: data }}>查看详情</Link>
-            <a href="#" onClick={this.publish.bind(this, data._id, data.publish)}> {publish}</a>
-            <Link to={{ pathname: `update/${data._id}`, state: data }}> 编辑</Link>
+            <a href="#" onClick={this.publish.bind(this, data._id, data.publish)} style={{ marginLeft: '20px' }}>{publish}</a>
+            <Link to={{ pathname: `update/${data._id}`, state: data }} style={{ marginLeft: '20px' }}>编辑</Link>
             <Popconfirm title="确定要删除这篇文章吗？" onConfirm={this.delete.bind(this, data._id)}>
-              <a href="#"> 删除</a>
+              <a href="#" style={{ marginLeft: '20px' }}>删除</a>
             </Popconfirm>
           </div>
         )

@@ -73,6 +73,46 @@ export default (state = {
         statusText: `Error: ${action.payload.status} ${action.payload.statusText}`
       })
 
+    case Types.PUBLISH_REQUEST:
+      return _.assign({}, state, {
+        isFetching: true,
+        statusText: null
+      })
+
+    case Types.PUBLISH_SUCCESS:
+      return _.assign({}, state, {
+        isFetching: false,
+        list: action.payload.data,
+        statusText: 'You have got publish article list successfully'
+      })
+
+    case Types.PUBLISH_FAILURE:
+      return _.assign({}, state, {
+        isFetching: false,
+        list: [],
+        statusText: `Error: ${action.payload.status} ${action.payload.statusText}`
+      })
+
+    case Types.CATEGORY_REQUEST:
+      return _.assign({}, state, {
+        isFetching: true,
+        statusText: null
+      })
+
+    case Types.CATEGORY_SUCCESS:
+      return _.assign({}, state, {
+        isFetching: false,
+        list: action.payload.data,
+        statusText: 'You have got category article list successfully'
+      })
+
+    case Types.CATEGORY_FAILURE:
+      return _.assign({}, state, {
+        isFetching: false,
+        list: [],
+        statusText: `Error: ${action.payload.status} ${action.payload.statusText}`
+      })
+
     default:
       return state
   }
