@@ -66,6 +66,19 @@ module.exports = {
   },
 
   /*******************************************
+   * 通过ID获取已发布的文章列表
+   *******************************************/
+  articleListById: (req, res) => {
+    const id = req.params.id
+
+    Article.findOne({ _id: id, publish: true }, (err, data) => {
+      if(err) return res.json(err)
+
+      res.status(200).json({data})
+    })
+  },
+
+  /*******************************************
    * 更新文章
    *******************************************/
   updateArticle: (req, res) => {

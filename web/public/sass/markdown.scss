@@ -4,6 +4,11 @@ $borderColor: #ccc;
 
 .markdown {
   line-height: 1.5;
+  
+  p {
+    margin: 20px 0;
+    word-wrap: break-word;
+  }
 
   h1, h2, h3, h4, h5, h6 {
     margin: 12px 0;
@@ -27,6 +32,7 @@ $borderColor: #ccc;
   }
 
   pre {
+    margin: 20px 0;
     background-color: #eee;
     color: #555;
     border-radius: 3px;
@@ -54,7 +60,7 @@ $borderColor: #ccc;
   }
 
   blockquote {
-    margin: 0;
+    margin: 20px 0;
     padding: 5px 10px 5px 15px;
     border-left: 5px solid $color;
     background-color: #eee;

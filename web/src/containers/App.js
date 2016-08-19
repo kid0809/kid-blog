@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import { Popover, Icon } from 'antd'
 import { publish, catagoryArticle } from '../actions'
 
@@ -42,7 +43,7 @@ class App extends React.Component {
       <div>
         <header className="header">
           <div className="logo">
-            kid's blog
+            <Link to={{ pathname: '/' }} style={{ color: '#fff' }}>kid's blog</Link>
           </div>
         </header>
 
@@ -77,7 +78,7 @@ class App extends React.Component {
           </div>
         </nav>
 
-        <div className="article-wrap">
+        <div className="main-wrapper nav-left">
           {this.props.children && React.cloneElement(this.props.children, {
             dispatch,
             article

@@ -12,6 +12,7 @@ import Reg from './src/components/Reg'
 import Post from './src/components/Post'
 import UpdateArticle from './src/components/UpdateArticle'
 import Article from './src/components/Article'
+import Blog from './src/components/Blog'
 
 
 function isLogin(nextState, replaceState) {
@@ -31,9 +32,10 @@ function requireLogin(nextState, replace) {
 
 export default (
   <Route path="/">
-    <IndexRedirect to="index" />
-    <Route path="index" component={App}>
+    <IndexRedirect to="home" />
+    <Route path="home" component={App}>
       <IndexRoute component={FrontHome} />
+      <Route path="blogs/:id" component={Blog} />
     </Route>
     <Route path="dashboard" component={Dashboard}>
       <IndexRedirect to="login" />

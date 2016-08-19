@@ -19,6 +19,7 @@ module.exports = (express, env, app) => {
     .get('/article/all', Article.articleList)
     .get('/article/publish', Article.articlePublishList)
     .get('/article/:category', Article.articleListByCategory)
+    .get('/article/id/:id', Article.articleListById)
     .post('/article/create', expressJWT({secret: config.secret}), Article.createArticle)
     .put('/article', expressJWT({secret: config.secret}), Article.updateArticle)
     .put('/article/publish', expressJWT({secret: config.secret}), Article.updatePublish)
