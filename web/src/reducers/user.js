@@ -1,23 +1,25 @@
-import _ from 'lodash'
+import Immutable from 'immutable'
 import * as Types from '../constants/ActionTypes'
 import jwtDecode from 'jwt-decode'
 
-export default (state = {
+const initialState = Immutable.fromJS({
   token: null,
   userName: null,
   isAuthenticated: false,
   isAuthenticating: false,
   statusText: null
-}, action) => {
+})
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case Types.LOGIN_USER_REQUEST:
-      return _.assign({}, state, {
+      return state.merge({
         isAuthenticating: true,
         statusText: null
       })
 
     case Types.LOGIN_USER_SUCCESS:
-      return _.assign({}, state, {
+      return state.merge({
         isAuthenticating: false,
         isAuthenticated: true,
         token: action.payload.token,
@@ -27,7 +29,7 @@ export default (state = {
       })
 
     case Types.LOGIN_USER_FAILURE:
-      return _.assign({}, state, {
+      return state.merge({
         isAuthenticating: false,
         isAuthenticated: false,
         token: null,
@@ -36,7 +38,7 @@ export default (state = {
       })
 
     case Types.USER_LOGOUT:
-      return _.assign({}, state, {
+      return state.merge({
         isAuthenticated: false,
         token: null,
         userName: null,

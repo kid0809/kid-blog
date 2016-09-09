@@ -1,8 +1,13 @@
 import React from 'react'
 import moment from 'moment'
 import marked from 'marked'
+import Immutable from 'immutable'
 
 class Article extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return !Immutable.is(this.props.article, nextProps.article)
+  }
+
   render() {
     return (
       <div className="markdown">

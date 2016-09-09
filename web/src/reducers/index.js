@@ -1,8 +1,8 @@
 // import * as ActionTypes from '../actions'
-import { routerReducer as routing } from 'react-router-redux'
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux-immutable'
 import user from './user'
 import article from './article'
+import routing from './router'
 
 const rootReducer = combineReducers({
   user,

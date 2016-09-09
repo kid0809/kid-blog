@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import { push } from 'react-router-redux'
 import { Popover, Icon } from 'antd'
 import { publish, catagoryArticle } from '../actions'
 
@@ -23,11 +24,13 @@ class App extends React.Component {
 
   catagory(catagory) {
     const { dispatch } = this.props
+    dispatch(push('/home'))
     dispatch(catagoryArticle(catagory))
   }
 
   render() {
     const { dispatch, article } = this.props
+
     const content = (
       <div>
         <div style={{ fontSize: '14px' }}><a onClick={this.catagory.bind(this, '技术')}>技术</a></div>
@@ -59,7 +62,7 @@ class App extends React.Component {
             </div>
             <div style={{ marginTop: '20px' }}>
               <Popover content={content} trigger="hover" placement="right">
-                <a href="#">
+                <a>
                   分类
                 </a>
               </Popover>
@@ -91,7 +94,7 @@ class App extends React.Component {
 
 // Redux 回传值
 function mapStateToProps(state) {
-  const { article } = state
+  const article = state.get('article')
 
   return { article }
 }

@@ -146,6 +146,7 @@ class MdEditor extends React.Component {
   }
 
   render() {
+    console.log('render')
     const panelClass = cNames(['md-panel', { fullscreen: this.state.isFullScreen }])
     const editorClass = cNames(['md-editor', { expand: this.state.mode === 'edit' }])
     const previewClass = cNames(['md-preview', 'markdown', { expand: this.state.mode === 'preview', shrink: this.state.mode === 'edit' }])

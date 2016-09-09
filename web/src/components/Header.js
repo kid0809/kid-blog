@@ -6,6 +6,10 @@ import { logout } from '../actions'
 /* global API_SERVER */
 
 class Header extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.isAuthenticated !== nextProps.isAuthenticated
+  }
+
   userLogout(event) {
     event.preventDefault()
     const { dispatch } = this.props

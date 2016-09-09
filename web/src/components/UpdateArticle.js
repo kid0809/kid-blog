@@ -77,6 +77,7 @@ class UpdateAricle extends React.Component {
   }
 
   render() {
+    console.log('render')
     return (
       <div>
         <h4>文章标题</h4>

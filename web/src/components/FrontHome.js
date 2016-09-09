@@ -1,15 +1,21 @@
 import React from 'react'
 import moment from 'moment'
 import marked from 'marked'
+import Immutable from 'immutable'
 import { Link } from 'react-router'
+
 
 class FrontHome extends React.Component {
   constructor(props) {
     super(props)
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !Immutable.is(this.props.article, nextProps.article)
+  }
+
   renderArticles() {
-    const { list } = this.props.article
+    const list = this.props.article.get('list').toJS()
     const articles = list.map((data, i) => {
       const content = marked(data.content).split('<a id=\'more\'></a>')
       return (

@@ -9,8 +9,10 @@ import classNames from 'classnames'
 class Dashboard extends React.Component {
   render() {
     const { user, dispatch, article } = this.props
-    const { isAuthenticated, token } = user
+    const isAuthenticated = user.get('isAuthenticated')
+    const token = user.get('token')
     const style = classNames({ 'main-wrapper': true }, { 'nav-left': isAuthenticated })
+
     return (
       <div>
         <Header isAuthenticated={isAuthenticated} dispatch={dispatch} token={token} />
@@ -30,7 +32,8 @@ class Dashboard extends React.Component {
 
 // Redux 回传值
 function mapStateToProps(state) {
-  const { user, article } = state
+  const article = state.get('article')
+  const user = state.get('user')
 
   return { user, article }
 }

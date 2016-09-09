@@ -37,6 +37,9 @@ class Blog extends React.Component {
       })
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.article !== nextState.article
+  }
 
   render() {
     let data = null

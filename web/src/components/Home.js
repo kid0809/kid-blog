@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import Immutable from 'immutable'
 import { article, publishArticle, deleteArticle } from '../actions'
 import { Link } from 'react-router'
 import { Table, Popconfirm } from 'antd'
@@ -14,6 +15,10 @@ class Home extends React.Component {
   componentWillMount() {
     const { dispatch } = this.props
     dispatch(article())
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !Immutable.is(this.props.article, nextProps.article)
   }
 
   delete(id) {
@@ -33,7 +38,7 @@ class Home extends React.Component {
   }
 
   renderTable() {
-    const { list } = this.props.article
+    const list = this.props.article.get('list').toJS()
 
     const columns = [{
       title: '标题',
@@ -71,7 +76,8 @@ class Home extends React.Component {
   }
 
   render() {
-    const { list } = this.props.article
+    console.log('render')
+    const list = this.props.article.get('list').toJS()
 
     return (
       <div>

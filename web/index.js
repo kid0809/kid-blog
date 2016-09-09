@@ -10,7 +10,11 @@ import { loginUserSuccess } from './src/actions'
 import 'rc-notification/assets/index.css'
 
 const store = configureStore()
-const history = syncHistoryWithStore(browserHistory, store)
+const history = syncHistoryWithStore(browserHistory, store, {
+  selectLocationState(state) {
+    return state.get('routing').toJS()
+  }
+})
 
 const token = localStorage.getItem('token')
 if (token !== null) {
