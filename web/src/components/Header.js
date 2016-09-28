@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { is } from 'immutable'
 import { push } from 'react-router-redux'
 import { logout } from '../actions'
 
@@ -7,7 +8,8 @@ import { logout } from '../actions'
 
 class Header extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
-    return this.props.isAuthenticated !== nextProps.isAuthenticated
+    return !(this.props === nextProps || is(this.props, nextProps)) ||
+           !(this.state === nextState || is(this.state, nextState));
   }
 
   userLogout(event) {

@@ -1,10 +1,11 @@
 import React from 'react'
-import Immutable from 'immutable'
+import { is } from 'immutable'
 
 
 class Nav extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
-    return !Immutable.is(this.props.user, nextProps.user)
+    return !(this.props === nextProps || is(this.props, nextProps)) ||
+           !(this.state === nextState || is(this.state, nextState));
   }
 
   render() {

@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import Immutable from 'immutable'
+import { is } from 'immutable'
 import { Link } from 'react-router'
 import { Table, Popconfirm } from 'antd'
 import { article, publishArticle, deleteArticle } from '../actions'
@@ -19,7 +19,8 @@ class Home extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return !Immutable.is(this.props.article, nextProps.article)
+    return !(this.props === nextProps || is(this.props, nextProps)) ||
+           !(this.state === nextState || is(this.state, nextState));
   }
 
   delete(id) {
