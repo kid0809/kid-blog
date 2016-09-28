@@ -26,7 +26,6 @@ module.exports = [
       vendor: ['react', 'react-router', 'redux'],
       css: ['./web/public/sass/main.scss'],
       components: [
-        'webpack-hot-middleware/client',
         './web/index.js'
       ]
     },
@@ -67,13 +66,13 @@ module.exports = [
           loader: 'eslint-loader'
         },
         {
-          test: /\.scss/,
+          test: /\.scss$/,
           exclude: /node_modules/,
           loader: 'style-loader!css-loader!postcss-loader!sass-loader?browsers=last 2 version'
         },
 
         {
-          test: /\.css/,
+          test: /\.css$/,
           loader: 'style-loader!css-loader'
         },
       ]
@@ -82,7 +81,7 @@ module.exports = [
         return [precss, autoprefixer];
     },
     resolve: {
-      extensions: ['', '.js', '.jsx']
+      extensions: ['', '.js']
     }
   },
 
@@ -107,7 +106,7 @@ module.exports = [
     module: {
       loaders: [
         {
-          test: /\.(js|jsx)/,
+          test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
           query: {
@@ -141,4 +140,60 @@ module.exports = [
       })
     ]
   },
+
+  // 打包 api Server 代码
+  {
+    target: 'node',
+
+    context: path.resolve(__dirname, '..'),
+    node: {
+      __dirname: true
+    },
+
+    entry: {
+      'webserver' : ['./api/apiserver.js']
+    },
+
+    output: {
+      path: path.resolve(__dirname, '../bundle/api'),
+      filename: '[name].bundle.js'
+    },
+
+    module: {
+      loaders: [
+        {
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader',
+          query: {
+            presets: ['es2015']
+          }
+        }
+      ]
+    },
+
+    resolve: {
+      extensions: ['', '.js']
+    },
+
+    externals: nodeModules,
+
+    plugins: [
+      // optimizations
+      new webpack.NoErrorsPlugin(),
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.OccurenceOrderPlugin(true),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: false
+        }
+      }),
+      new webpack.DefinePlugin({
+        "process.env": {
+          NODE_ENV: JSON.stringify("production")
+        },
+        __DEVELOPMENT__: false
+      })
+    ]
+  }
 ]

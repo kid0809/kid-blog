@@ -1,7 +1,7 @@
 import React from 'react'
+import { Input, Button, Select, message } from 'antd'
 import Editor from './Editor'
 import { checkStatus, parseJSON } from '../utils/fetch'
-import { Input, Button, Select, message } from 'antd'
 
 
 const Option = Select.Option
@@ -17,7 +17,7 @@ class Post extends React.Component {
       content: ''
     }
     this.titleChange = this.titleChange.bind(this)
-    this.categoryChange = (value) => this.category(value)
+    this.categoryChange = value => this.category(value)
     this.contentChange = this.contentChange.bind(this)
     this.publish = this.publish.bind(this)
   }
@@ -60,7 +60,7 @@ class Post extends React.Component {
     })
     .then(checkStatus)
     .then(parseJSON)
-    .then(res => {
+    .then((res) => {
       console.log(res)
       message.success('文章创建成功')
 
@@ -70,7 +70,7 @@ class Post extends React.Component {
         content: ''
       })
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err)
       if (err.response.status === 401) {
         message.error('没有权限创建文章')

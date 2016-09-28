@@ -17,8 +17,8 @@ class MdEditor extends React.Component {
 
   componentDidMount() {
     // cache dom node
-    this.textControl = this.refs.editor
-    this.previewControl = this.refs.preview
+    this.textControl = this.editor
+    this.previewControl = this.preview
   }
 
   componentWillUnmount() {
@@ -37,27 +37,31 @@ class MdEditor extends React.Component {
 
   // widgets constructors
   getModeBar() {
-    const checkActive = (mode) => cNames({ active: this.state.mode === mode })
+    const checkActive = mode => cNames({ active: this.state.mode === mode })
 
     return (
       <ul className="md-modebar">
         <li className="tb-btn pull-right">
           <a className={checkActive('preview')} onClick={this.changeMode.bind(this, 'preview')} title="预览模式">
-            <i className="fa fa-eye"></i>
+            <i className="fa fa-eye" />
           </a>
         </li> {/* preview mode */}
         <li className="tb-btn pull-right">
           <a className={checkActive('split')} onClick={this.changeMode.bind(this, 'split')} title="分屏模式">
-            <i className="fa fa-columns"></i>
+            <i className="fa fa-columns" />
           </a>
         </li> {/* split mode */}
         <li className="tb-btn pull-right">
           <a className={checkActive('edit')} onClick={this.changeMode.bind(this, 'edit')} title="编辑模式">
-            <i className="fa fa-pencil"></i>
+            <i className="fa fa-pencil" />
           </a>
         </li> {/* edit mode */}
-        <li className="tb-btn spliter pull-right"></li>
-        <li className="tb-btn pull-right"><a title="全屏模式" onClick={this.toggleFullScreen.bind(this)}><i className="fa fa-arrows-alt"></i></a></li> {/* full-screen */}
+        <li className="tb-btn spliter pull-right" />
+        <li className="tb-btn pull-right">
+          <a title="全屏模式" onClick={this.toggleFullScreen.bind(this)}>
+            <i className="fa fa-arrows-alt" />
+          </a>
+        </li> {/* full-screen */}
       </ul>
     )
   }
@@ -65,17 +69,17 @@ class MdEditor extends React.Component {
   getToolBar() {
     return (
       <ul className="md-toolbar clearfix">
-        <li className="tb-btn"><a title="加粗" onClick={this.boldText.bind(this)}><i className="fa fa-bold"></i></a></li> {/* bold */}
-        <li className="tb-btn"><a title="斜体" onClick={this.italicText.bind(this)}><i className="fa fa-italic"></i></a></li> {/* italic */}
-        <li className="tb-btn spliter"></li>
-        <li className="tb-btn"><a title="链接" onClick={this.linkText.bind(this)}><i className="fa fa-link"></i></a></li> {/* link */}
-        <li className="tb-btn"><a title="引用" onClick={this.blockquoteText.bind(this)}><i className="fa fa-outdent"></i></a></li> {/* blockquote */}
-        <li className="tb-btn"><a title="代码段" onClick={this.codeText.bind(this)}><i className="fa fa-code"></i></a></li> {/* code */}
-        <li className="tb-btn"><a title="图片" onClick={this.pictureText.bind(this)}><i className="fa fa-picture-o"></i></a></li> {/* picture-o */}
-        <li className="tb-btn spliter"></li>
-        <li className="tb-btn"><a title="有序列表" onClick={this.listOlText.bind(this)}><i className="fa fa-list-ol"></i></a></li> {/* list-ol */}
-        <li className="tb-btn"><a title="无序列表" onClick={this.listUlText.bind(this)}><i className="fa fa-list-ul"></i></a></li> {/* list-ul */}
-        <li className="tb-btn"><a title="标题" onClick={this.headerText.bind(this)}><i className="fa fa-header"></i></a></li> {/* header */}
+        <li className="tb-btn"><a title="加粗" onClick={this.boldText.bind(this)}><i className="fa fa-bold" /></a></li> {/* bold */}
+        <li className="tb-btn"><a title="斜体" onClick={this.italicText.bind(this)}><i className="fa fa-italic" /></a></li> {/* italic */}
+        <li className="tb-btn spliter" />
+        <li className="tb-btn"><a title="链接" onClick={this.linkText.bind(this)}><i className="fa fa-link" /></a></li> {/* link */}
+        <li className="tb-btn"><a title="引用" onClick={this.blockquoteText.bind(this)}><i className="fa fa-outdent" /></a></li> {/* blockquote */}
+        <li className="tb-btn"><a title="代码段" onClick={this.codeText.bind(this)}><i className="fa fa-code" /></a></li> {/* code */}
+        <li className="tb-btn"><a title="图片" onClick={this.pictureText.bind(this)}><i className="fa fa-picture-o" /></a></li> {/* picture-o */}
+        <li className="tb-btn spliter" />
+        <li className="tb-btn"><a title="有序列表" onClick={this.listOlText.bind(this)}><i className="fa fa-list-ol" /></a></li> {/* list-ol */}
+        <li className="tb-btn"><a title="无序列表" onClick={this.listUlText.bind(this)}><i className="fa fa-list-ul" /></a></li> {/* list-ul */}
+        <li className="tb-btn"><a title="标题" onClick={this.headerText.bind(this)}><i className="fa fa-header" /></a></li> {/* header */}
       </ul>
     )
   }
@@ -158,10 +162,10 @@ class MdEditor extends React.Component {
           {this.getToolBar()}
         </div>
         <div className={editorClass}>
-          <textarea ref="editor" name="content" value={this.props.content} onChange={this.onChange.bind(this)}></textarea>{/* style={{height: this.state.editorHeight + 'px'}} */}
+          <textarea ref={(c) => { this.editor = c }} name="content" value={this.props.content} onChange={this.onChange.bind(this)} />{/* style={{height: this.state.editorHeight + 'px'}} */}
         </div>
-        <div className={previewClass} ref="preview" dangerouslySetInnerHTML={{ __html: marked(this.props.content) }}></div>
-        <div className="md-spliter"></div>
+        <div className={previewClass} ref={(c) => { this.preview = c }} dangerouslySetInnerHTML={{ __html: marked(this.props.content) }} />
+        <div className="md-spliter" />
       </div>
     )
   }

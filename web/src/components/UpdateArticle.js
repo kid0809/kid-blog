@@ -1,8 +1,8 @@
 import React from 'react'
-import Editor from './Editor'
 import { push } from 'react-router-redux'
-import { checkStatus, parseJSON } from '../utils/fetch'
 import { Input, Button, Select, message } from 'antd'
+import Editor from './Editor'
+import { checkStatus, parseJSON } from '../utils/fetch'
 
 
 const Option = Select.Option
@@ -18,7 +18,7 @@ class UpdateAricle extends React.Component {
       content: props.location.state.content
     }
     this.titleChange = this.titleChange.bind(this)
-    this.categoryChange = (value) => this.category(value)
+    this.categoryChange = value => this.category(value)
     this.contentChange = this.contentChange.bind(this)
     this.publish = this.publish.bind(this)
   }
@@ -66,7 +66,7 @@ class UpdateAricle extends React.Component {
       message.success('文章修改成功')
       dispatch(push('/dashboard'))
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err)
       if (err.response.status === 401) {
         message.error('没有权限修改文章')

@@ -57,7 +57,7 @@ module.exports = {
 
       {
         test: /\.css/,
-        loader: 'style-loader!css-loader'
+        loader: 'style-loader!css-loader!postcss-loader'
       },
     ]
   },
@@ -65,6 +65,6 @@ module.exports = {
       return [precss, autoprefixer];
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js']
   }
 }

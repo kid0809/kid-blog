@@ -8,7 +8,14 @@
   "rules": {
     "strict": 0,
     "spaced-comment": [2, "always", { "exceptions": ["*"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
+    "class-methods-use-this": ["error", { "exceptMethods": ["renderNotLogin"] }],
 
+    "react/no-danger": 0,
+    "import/newline-after-import": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "no-extra-boolean-cast": 0,
     "react/jsx-quotes": 0,
     "react/prop-types": 0,
     "react/jsx-uses-vars": 2,

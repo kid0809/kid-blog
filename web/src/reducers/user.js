@@ -1,6 +1,7 @@
 import Immutable from 'immutable'
-import * as Types from '../constants/ActionTypes'
 import jwtDecode from 'jwt-decode'
+import * as Types from '../constants/ActionTypes'
+
 
 const initialState = Immutable.fromJS({
   token: null,

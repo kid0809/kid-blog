@@ -1,7 +1,7 @@
 import React from 'react'
 import { push } from 'react-router-redux'
-import { checkStatus, parseJSON } from '../utils/fetch'
 import { Form, Input, Button, Radio, message } from 'antd'
+import { checkStatus, parseJSON } from '../utils/fetch'
 
 const FormItem = Form.Item
 const RadioGroup = Radio.Group

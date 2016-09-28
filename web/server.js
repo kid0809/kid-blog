@@ -2,9 +2,7 @@ import path    from 'path'
 import express from 'express'
 import errorhandler from 'errorhandler'
 import webpack from 'webpack'
-import webpackDevMiddleware from 'webpack-dev-middleware'
-import webpackHotMiddleware from 'webpack-hot-middleware'
-import config from '../config/dev.webpack.config'
+
 
 const app = express()
 const port = 8080
@@ -23,6 +21,10 @@ app.use('/', express.static(publicDir))
  * 判断运行环境,执行不同动作
  */
 if (env === 'development') {
+  const webpack = require('webpack')
+  const webpackDevMiddleware = require('webpack-dev-middleware')
+  const webpackHotMiddleware = require('webpack-hot-middleware')
+  const config = require('../config/dev.webpack.config')
   // webpack 热更新
   const compiler = webpack(config)
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
@@ -38,7 +40,7 @@ if (env === 'development') {
 
 
 app.use(function(req, res) {
-  res.sendFile(__dirname + '/index.html')
+  res.sendFile('index.html', { root: __dirname })
 })
 
 app.listen(port, (error) => {

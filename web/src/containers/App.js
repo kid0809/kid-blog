@@ -33,10 +33,18 @@ class App extends React.Component {
 
     const content = (
       <div>
-        <div style={{ fontSize: '14px' }}><a onClick={this.catagory.bind(this, '技术')}>技术</a></div>
-        <div style={{ fontSize: '14px' }}><a onClick={this.catagory.bind(this, '心情')}>心情</a></div>
-        <div style={{ fontSize: '14px' }}><a onClick={this.catagory.bind(this, '生活')}>生活</a></div>
-        <div style={{ fontSize: '14px' }}><a onClick={this.catagory.bind(this, '职场')}>职场</a></div>
+        <div style={{ fontSize: '14px' }}>
+          <a onClick={this.catagory.bind(this, '技术')}>技术</a>
+        </div>
+        <div style={{ fontSize: '14px' }}>
+          <a onClick={this.catagory.bind(this, '心情')}>心情</a>
+        </div>
+        <div style={{ fontSize: '14px' }}>
+          <a onClick={this.catagory.bind(this, '生活')}>生活</a>
+        </div>
+        <div style={{ fontSize: '14px' }}>
+          <a onClick={this.catagory.bind(this, '职场')}>职场</a>
+        </div>
       </div>
     )
 
@@ -46,7 +54,9 @@ class App extends React.Component {
       <div>
         <header className="header">
           <div className="logo">
-            <Link to={{ pathname: '/' }} style={{ color: '#fff' }}>kid's blog</Link>
+            <Link to={{ pathname: '/' }} style={{ color: '#fff' }}>
+            kid&apos;s blog
+            </Link>
           </div>
         </header>
 
@@ -69,13 +79,15 @@ class App extends React.Component {
             </div>
 
             <div style={{ marginTop: '20px' }}>
-              <a href="#">关于我</a>
+              <a>关于我</a>
             </div>
 
             <div style={{ marginTop: '100px' }}>
-              <a href="https://github.com/kid0809" target="_blank"><Icon type="github" style={{ fontSize: '20px', color: '#666' }} /></a>
+              <a href="https://github.com/kid0809" target="_blank" rel="noopener noreferrer">
+                <Icon type="github" style={{ fontSize: '20px', color: '#666' }} />
+              </a>
               <Popover content={qrcode} trigger="hover" placement="right">
-                <a href="#"><i className="fa fa-weixin" style={{ fontSize: '20px', color: '#666', marginLeft: '5px' }} /></a>
+                <a><i className="fa fa-weixin" style={{ fontSize: '20px', color: '#666', marginLeft: '5px' }} /></a>
               </Popover>
             </div>
           </div>

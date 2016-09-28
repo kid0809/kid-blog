@@ -32,17 +32,18 @@ class Header extends React.Component {
       <ul>
         <li><Link to={{ pathname: '/dashboard/home' }} activeStyle={{ color: '#6556e2' }}>主页</Link></li>  
         <li><Link to={{ pathname: '/dashboard/post' }} activeStyle={{ color: '#6556e2' }}>发布</Link></li>
-        <li><a href="#" onClick={this.userLogout.bind(this)}>登出</a></li>
+        <li><a onClick={this.userLogout.bind(this)}>登出</a></li>
       </ul>
     )
   }
+
 
   render() {
     const { isAuthenticated } = this.props
     return (
       <header className="header">
         <div className="logo">
-          kid's blog 后台管理系统
+          kid&apos;s blog 后台管理系统
         </div>
         <div className="menu">
           {isAuthenticated ? this.renderLogin() : this.renderNotLogin()}

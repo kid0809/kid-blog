@@ -16,13 +16,13 @@ import Blog from './src/components/Blog'
 
 
 function isLogin(nextState, replaceState) {
-  if (!!window.localStorage.token && nextState.location.pathname.match('/dashboard')) {
+  if (!!window.sessionStorage.token && nextState.location.pathname.match('/dashboard')) {
     replaceState('/dashboard/home')
   }
 }
 
 function requireLogin(nextState, replace) {
-  if (!window.localStorage.token) {
+  if (!window.sessionStorage.token) {
     replace({
       pathname: '/dashboard',
       state: { nextPathname: nextState.location.pathname }

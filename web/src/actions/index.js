@@ -1,15 +1,15 @@
-import * as Types from '../constants/ActionTypes'
-import { checkStatus, parseJSON } from '../utils/fetch'
 import { push } from 'react-router-redux'
 import jwtDecode from 'jwt-decode'
 import fetch from 'isomorphic-fetch'
 import { message } from 'antd'
+import * as Types from '../constants/ActionTypes'
+import { checkStatus, parseJSON } from '../utils/fetch'
 
 
 /* global API_SERVER */
 
 export function loginUserSuccess(token) {
-  localStorage.setItem('token', token)
+  sessionStorage.setItem('token', token)
   return {
     type: Types.LOGIN_USER_SUCCESS,
     payload: {
@@ -19,7 +19,7 @@ export function loginUserSuccess(token) {
 }
 
 function loginUserFailure(error) {
-  localStorage.removeItem('token')
+  sessionStorage.removeItem('token')
   if (error.response.status === 404) {
     message.error('账号或密码错误')
   }
@@ -50,7 +50,7 @@ export function loginUser(data) {
     })
       .then(checkStatus)
       .then(parseJSON)
-      .then(res => {
+      .then((res) => {
         try {
           jwtDecode(res.token)
           dispatch(loginUserSuccess(res.token))
@@ -64,7 +64,7 @@ export function loginUser(data) {
           }))
         }
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch(loginUserFailure(error))
       })
   }
@@ -72,7 +72,7 @@ export function loginUser(data) {
 
 
 export function logout() {
-  localStorage.removeItem('token')
+  sessionStorage.removeItem('token')
   return {
     type: Types.USER_LOGOUT
   }
@@ -114,10 +114,10 @@ export function article() {
     })
       .then(checkStatus)
       .then(parseJSON)
-      .then(res => {
+      .then((res) => {
         dispatch(articleSuccess(res.data))
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch(articleFailure(error))
       })
   }
@@ -172,7 +172,7 @@ export function publishArticle(data, token) {
       .then(() => {
         dispatch(publishArticleSuccess(data))
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch(publishArticleFailure(error))
       })
   }
@@ -227,7 +227,7 @@ export function deleteArticle(id, token) {
       .then(() => {
         dispatch(deleteArticleSuccess(id))
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch(deleteArticleFailure(error))
       })
   }
@@ -270,10 +270,10 @@ export function publish() {
     })
       .then(checkStatus)
       .then(parseJSON)
-      .then(res => {
+      .then((res) => {
         dispatch(publishSuccess(res.data))
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch(publishFailure(error))
       })
   }
@@ -316,10 +316,10 @@ export function catagoryArticle(category) {
     })
       .then(checkStatus)
       .then(parseJSON)
-      .then(res => {
+      .then((res) => {
         dispatch(catagoryArticleSuccess(res.data))
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch(catagoryArticleFailure(error))
       })
   }

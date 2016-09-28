@@ -16,8 +16,7 @@ class Article extends React.Component {
           <span style={{ color: '#999999' }}>标签：{this.props.location.state.category.toString()}，</span>
           <span style={{ color: '#999999' }}>{moment(this.props.location.state.createAt).format('YYYY-MM-DD')}</span>
         </div>
-        <article dangerouslySetInnerHTML={{ __html: marked(this.props.location.state.content) }}>
-        </article>
+        <article dangerouslySetInnerHTML={{ __html: marked(this.props.location.state.content) }} />
       </div>
     )
   }

@@ -1,9 +1,9 @@
 import React from 'react'
 import moment from 'moment'
-import marked from 'marked'
-import { checkStatus, parseJSON } from '../utils/fetch'
 import fetch from 'isomorphic-fetch'
 import { message } from 'antd'
+import marked from 'marked'
+import { checkStatus, parseJSON } from '../utils/fetch'
 
 /* global API_SERVER */
 
@@ -26,12 +26,12 @@ class Blog extends React.Component {
     })
       .then(checkStatus)
       .then(parseJSON)
-      .then(res => {
+      .then((res) => {
         this.setState({
           article: res.data
         })
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error)
         message.error('服务器错误')
       })
@@ -49,10 +49,11 @@ class Blog extends React.Component {
           <h2>{this.state.article.title}</h2>
           <div>
             <span style={{ color: '#999999' }}>分类：{this.state.article.category.toString()}</span>
-            <span style={{ color: '#999999', marginLeft: '30px' }}><i className="fa fa-clock-o"></i> {moment(this.state.article.createAt).format('YYYY-MM-DD')}</span>
+            <span style={{ color: '#999999', marginLeft: '30px' }}>
+              <i className="fa fa-clock-o" /> {moment(this.state.article.createAt).format('YYYY-MM-DD')}
+            </span>
           </div>
-          <article dangerouslySetInnerHTML={{ __html: marked(this.state.article.content) }} style={{ marginTop: '40px' }}>
-          </article>
+          <article dangerouslySetInnerHTML={{ __html: marked(this.state.article.content) }} style={{ marginTop: '40px' }} />
         </div>
       )
     }

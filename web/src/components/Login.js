@@ -1,6 +1,6 @@
 import React from 'react'
-import { loginUser } from '../actions'
 import { Form, Input, Button } from 'antd'
+import { loginUser } from '../actions'
 
 const FormItem = Form.Item
 
@@ -42,13 +42,21 @@ class Login extends React.Component {
               {...formItemLayout}
               label="登录名"
             >
-              <Input type="text" placeholder="请输入登录名" value={this.state.loginname} onChange={(event) => this.setState({ loginname: event.target.value })} />
+              <Input 
+                type="text" 
+                placeholder="请输入登录名" 
+                value={this.state.loginname} 
+                onChange={(event) => { this.setState({ loginname: event.target.value }) }} />
             </FormItem>
             <FormItem
               {...formItemLayout}
               label="密码"
             >
-              <Input type="password" placeholder="请输入密码" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} />
+              <Input
+                type="password" 
+                placeholder="请输入密码" 
+                value={this.state.password} 
+                onChange={(event) => { this.setState({ password: event.target.value }) }} />
             </FormItem>
 
             <FormItem

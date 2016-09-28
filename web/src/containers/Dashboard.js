@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import classNames from 'classnames'
 import Nav from '../components/Nav'
 import Header from '../components/Header'
-import classNames from 'classnames'
 
 /* global API_SERVER */
 
