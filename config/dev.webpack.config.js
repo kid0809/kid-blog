@@ -21,6 +21,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../web/bundle'),
     filename: '[name].js',
+    chunkFilename: '[id].chunk.js',
     publicPath: '/bundle/',
     sourceMapFilename: 'map/[file].map'
   },

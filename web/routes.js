@@ -5,14 +5,53 @@ import { Route, IndexRoute, IndexRedirect } from 'react-router'
 import Dashboard from './src/containers/Dashboard'
 import App from './src/containers/App'
 
-import Home from './src/components/Home'
+// import Home from './src/components/Home'
 import FrontHome from './src/components/FrontHome'
-import Login from './src/components/Login'
-import Reg from './src/components/Reg'
-import Post from './src/components/Post'
-import UpdateArticle from './src/components/UpdateArticle'
-import Article from './src/components/Article'
 import Blog from './src/components/Blog'
+
+const Home = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./src/components/Home').default)
+  }, 'home')
+}
+
+const Login = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./src/components/Login').default)
+  }, 'login')
+}
+
+const Reg = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./src/components/Reg').default)
+  }, 'reg')
+}
+
+const Post = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./src/components/Post').default)
+  }, 'post')
+}
+
+const UpdateArticle = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./src/components/UpdateArticle').default)
+  }, 'update')
+}
+
+
+const Article = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./src/components/Article').default)
+  }, 'article')
+}
+
+// import Login from './src/components/Login'
+// import Reg from './src/components/Reg'
+// import Post from './src/components/Post'
+// import UpdateArticle from './src/components/UpdateArticle'
+// import Article from './src/components/Article'
+
 
 
 function isLogin(nextState, replaceState) {
@@ -39,12 +78,12 @@ export default (
     </Route>
     <Route path="dashboard" component={Dashboard}>
       <IndexRedirect to="login" />
-      <Route path="login" component={Login} onEnter={isLogin} />
-      <Route path="reg" component={Reg} />
-      <Route path="home" component={Home} onEnter={requireLogin} />
-      <Route path="post" component={Post} onEnter={requireLogin} />
-      <Route path="/blog/:id" component={Article} onEnter={requireLogin} />
-      <Route path="/update/:id" component={UpdateArticle} onEnter={requireLogin} />
+      <Route path="login" getComponent={Login} onEnter={isLogin} />
+      <Route path="reg" getComponent={Reg} />
+      <Route path="home" getComponent={Home} onEnter={requireLogin} />
+      <Route path="post" getComponent={Post} onEnter={requireLogin} />
+      <Route path="/blog/:id" getComponent={Article} onEnter={requireLogin} />
+      <Route path="/update/:id" getComponent={UpdateArticle} onEnter={requireLogin} />
     </Route>
   </Route>
 )
