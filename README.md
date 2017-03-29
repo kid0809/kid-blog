@@ -1,7 +1,7 @@
 # kid-blog
 一个总结性的练手项目，后端技术栈express+mongodb+jwt写接口，前端则为react+redux+immutable。
 
-###项目启动：
+### 项目启动：
 
 1. 安装mongodb并启动
 2. npm install
