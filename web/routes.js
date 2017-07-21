@@ -71,11 +71,12 @@ function requireLogin(nextState, replace) {
 
 export default (
   <Route path="/">
-    <IndexRedirect to="home" />
+    {/* <IndexRedirect to="home" />
     <Route path="home" component={App}>
       <IndexRoute component={FrontHome} />
       <Route path="blogs/:id" component={Blog} />
-    </Route>
+    </Route> */}
+    <IndexRedirect to="dashboard" />
     <Route path="dashboard" component={Dashboard}>
       <IndexRedirect to="login" />
       <Route path="login" getComponent={Login} onEnter={isLogin} />

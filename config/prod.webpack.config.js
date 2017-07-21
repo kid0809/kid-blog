@@ -32,6 +32,8 @@ module.exports = [
     output: {
       path: path.resolve(__dirname, '../bundle/web/public/bundle'),
       filename: '[name].js',
+      chunkFilename: '[name].chunk.js',
+      publicPath: '/bundle/',
       sourceMapFilename: 'map/[file].map'
     },
     plugins: [
@@ -51,37 +53,42 @@ module.exports = [
       }),
     ],
     module: {
-      loaders: [
+      rules: [
         {
-          test: /\.js$/,
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
           loader: 'babel-loader',
-          query: {
+          options: {
             presets: ['es2015', 'react']
-          },
-          exclude: /node_modules/
+          }
         },
         {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          loader: 'eslint-loader'
+          test: /\.css$/,
+          use: [
+            'style-loader',
+            'css-loader',
+            'postcss-loader'
+          ]
         },
         {
           test: /\.scss$/,
           exclude: /node_modules/,
-          loader: 'style-loader!css-loader!postcss-loader!sass-loader?browsers=last 2 version'
+          use: [
+            'style-loader',
+            'css-loader',
+            'postcss-loader',
+            'sass-loader?browsers=last 2 version'
+          ]
         },
-
         {
-          test: /\.css$/,
-          loader: 'style-loader!css-loader'
-        },
+          test: /\.(png|jpg|jpeg|gif|svg)$/,
+          loader: 'url-loader?limit=100000'
+        }
       ]
     },
-    postcss: function () {
-        return [precss, autoprefixer];
-    },
+
     resolve: {
-      extensions: ['', '.js']
+      extensions: ['.js', 'jsx']
     }
   },
 
@@ -117,7 +124,7 @@ module.exports = [
     },
 
     resolve: {
-      extensions: ['', '.js']
+      extensions: ['.js', 'jsx']
     },
 
     externals: nodeModules,
@@ -126,7 +133,7 @@ module.exports = [
       // optimizations
       new webpack.NoErrorsPlugin(),
       new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.OccurenceOrderPlugin(true),
+      new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           warnings: false
@@ -151,7 +158,7 @@ module.exports = [
     },
 
     entry: {
-      'webserver' : ['./api/apiserver.js']
+      'apiserver' : ['./api/apiserver.js']
     },
 
     output: {
@@ -173,7 +180,7 @@ module.exports = [
     },
 
     resolve: {
-      extensions: ['', '.js']
+      extensions: ['.js', 'jsx']
     },
 
     externals: nodeModules,
@@ -182,7 +189,6 @@ module.exports = [
       // optimizations
       new webpack.NoErrorsPlugin(),
       new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.OccurenceOrderPlugin(true),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           warnings: false
