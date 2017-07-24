@@ -1,4 +1,4 @@
-// @import './normalize.css';
+@import './normalize.css';
 @import './dashboard.scss';
 @import './editor.scss';
 @import './markdown.scss';
@@ -13,16 +13,14 @@
 }
 
 html body {
+  height: 100%;
+  font-family: "PingFang SC,Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,Arial,sans-serif";
   font-size: 16px;
-}
-
-body {
-  font-family: "Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Noto Sans CJK SC,WenQuanYi Micro Hei,Arial,sans-serif";
 }
 
 .main-wrapper {
   margin-top: 60px;
-  padding: 50px;
+  padding: 50px; 
 }
 
 .nav-left {
@@ -32,5 +30,5 @@ body {
 .login-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 60px;
+  align-items: center;
 }

@@ -80,7 +80,7 @@ export default (
     <Route path="dashboard" component={Dashboard}>
       <IndexRedirect to="login" />
       <Route path="login" getComponent={Login} onEnter={isLogin} />
-      {/* <Route path="reg" getComponent={Reg} /> */}
+      <Route path="reg" getComponent={Reg} />
       <Route path="home" getComponent={Home} onEnter={requireLogin} />
       <Route path="post" getComponent={Post} onEnter={requireLogin} />
       <Route path="/blog/:id" getComponent={Article} onEnter={requireLogin} />
