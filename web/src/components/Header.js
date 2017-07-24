@@ -24,7 +24,6 @@ class Header extends React.Component {
     return (
       <ul>
         <li><Link to={{ pathname: '/dashboard/login' }} activeStyle={{ color: '#6556e2' }}>登录</Link></li>
-        <li><Link to={{ pathname: '/dashboard/reg' }} activeStyle={{ color: '#6556e2' }}>注册</Link></li>
       </ul>
     )
   }

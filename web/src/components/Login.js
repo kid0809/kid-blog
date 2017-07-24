@@ -28,6 +28,13 @@ class Login extends React.Component {
     dispatch(loginUser(payload))
   }
 
+  keyDown(event) {
+    const key = event.keyCode
+    if (key === 13) {
+      this.clickHandle()
+    }
+  }
+
   render() {
     const formItemLayout = {
       labelCol: { span: 6 },
@@ -56,7 +63,8 @@ class Login extends React.Component {
                 type="password" 
                 placeholder="请输入密码" 
                 value={this.state.password} 
-                onChange={(event) => { this.setState({ password: event.target.value }) }} />
+                onChange={(event) => { this.setState({ password: event.target.value }) }}
+                onKeyDown={this.keyDown.bind(this)} />
             </FormItem>
 
             <FormItem

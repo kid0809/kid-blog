@@ -49,7 +49,7 @@ module.exports = [
         "process.env": {
           NODE_ENV: JSON.stringify("production")
         },
-        'API_SERVER': JSON.stringify('http://localhost:8081')
+        'API_SERVER': JSON.stringify('http://47.90.97.141:8081')
       }),
     ],
     module: {
